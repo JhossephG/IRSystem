@@ -1,4 +1,4 @@
-package src.main.java.com.jhogo.irsystem.spending;
+package com.jhogo.irsystem.spending;
 public class Spending {
     private int amount;
     private String description;

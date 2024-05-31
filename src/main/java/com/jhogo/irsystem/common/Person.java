@@ -1,4 +1,4 @@
-package src.main.java.com.jhogo.irsystem.common;
+package com.jhogo.irsystem.common;
 import java.sql.Date;
 
 public abstract class Person {

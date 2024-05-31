@@ -1,0 +1,10 @@
+ALTER TABLE Employee ADD COLUMN address VARCHAR(200);
+ALTER TABLE Employee ADD COLUMN birthday DATE;
+
+ALTER TABLE Employee DROP COLUMN address;
+
+ALTER TABLE Employee CHANGE COLUMN name name VARCHAR(100);
+ALTER TABLE Employee CHANGE COLUMN role role VARCHAR(50);
+ALTER TABLE Employee CHANGE COLUMN username username VARCHAR(100);
+ALTER TABLE Employee CHANGE COLUMN password password VARCHAR(100);
+ALTER TABLE Employee CHANGE COLUMN store_id store_id INT;

@@ -29,10 +29,8 @@ CREATE TABLE Employee (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100),
     role VARCHAR(50),
-    address VARCHAR(200),
     username VARCHAR(100),
     password VARCHAR(100),
-    birthday DATE,
     store_id INT,
     FOREIGN KEY (store_id) REFERENCES Store(id)
 );

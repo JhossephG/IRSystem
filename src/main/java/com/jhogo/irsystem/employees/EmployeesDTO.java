@@ -2,7 +2,7 @@ package src.main.java.com.jhogo.irsystem.employees;
 
 import java.sql.Date;
 
-public class Employees {
+public class EmployeesDTO {
     private int id;
     private String name, userName, role, address, password;
     private Date birthday;

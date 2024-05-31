@@ -2,11 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
-    id("org.springframework.boot") version "2.6.6" // Atualize para a última versão estável
+    id("org.springframework.boot") version "2.6.6" 
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.21" // Atualize para a última versão estável
-    kotlin("plugin.spring") version "1.6.21" // Atualize para a última versão estável
-    id("org.flywaydb.flyway") version "8.5.11" // Atualize para a última versão estável
+    kotlin("jvm") version "1.6.21" 
+    kotlin("plugin.spring") version "1.6.21" 
+    id("org.flywaydb.flyway") version "8.5.11" 
 }
 
 group = "com.jhogo"
@@ -32,6 +32,19 @@ dependencies {
 
 application {
     mainClass.set("com.jhogo.irsystem.ApplicationKt")
+}
+
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf("src/main/java"))
+        }
+    }
+    test {
+        java {
+            setSrcDirs(listOf("src/test/java"))
+        }
+    }
 }
 
 tasks.withType<KotlinCompile> {

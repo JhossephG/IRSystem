@@ -307,6 +307,19 @@ application {
     mainClass.set("com.jhogo.irsystem.ApplicationKt")
 }
 
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf("src/main/java"))
+        }
+    }
+    test {
+        java {
+            setSrcDirs(listOf("src/test/java"))
+        }
+    }
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")

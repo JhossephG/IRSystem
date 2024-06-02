@@ -17,8 +17,8 @@ public class CarDAO {
             statement.setString(2, car.getBrand());
             statement.setString(3, car.getChassis());
             statement.setInt(4, car.getManufactureYear());
-            statement.setDouble(5, car.getSaleValue());
-            statement.setDouble(6, car.getPurchaseValue());
+            statement.setBigDecimal(5, car.getSaleValue());
+            statement.setBigDecimal(6, car.getPurchaseValue());
             statement.setBoolean(7, car.isInStore());
             statement.executeUpdate();
         }
@@ -36,8 +36,8 @@ public class CarDAO {
                     car.setBrand(resultSet.getString("brand"));
                     car.setChassis(resultSet.getString("chassis"));
                     car.setManufactureYear(resultSet.getInt("manufactureYear"));
-                    car.setSaleValue(resultSet.getDouble("saleValue"));
-                    car.setPurchaseValue(resultSet.getDouble("purchaseValue"));
+                    car.setSaleValue(resultSet.getBigDecimal("saleValue"));
+                    car.setPurchaseValue(resultSet.getBigDecimal("purchaseValue"));
                     car.setInStore(resultSet.getBoolean("inStore"));
                     cars.add(car); 
                 }
@@ -52,8 +52,8 @@ public class CarDAO {
             statement.setString(2, car.getBrand());
             statement.setString(3, car.getChassis());
             statement.setInt(4, car.getManufactureYear());
-            statement.setDouble(5, car.getSaleValue());
-            statement.setDouble(6, car.getPurchaseValue());
+            statement.setBigDecimal(5, car.getSaleValue());
+            statement.setBigDecimal(6, car.getPurchaseValue());
             statement.setBoolean(7, car.isInStore());
             statement.setInt(8, car.getId());
             statement.executeUpdate(); 

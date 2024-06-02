@@ -1,8 +1,12 @@
 package com.jhogo.irsystem.user;
 import java.sql.Timestamp;
+import java.util.List;
+
+import com.jhogo.irsystem.car.Car;
 import com.jhogo.irsystem.common.Person;
 
 public class User extends Person {
+    private List<Car> cars;
     private String idNumber;
     private String phoneNumber;
     private String email;
@@ -32,5 +36,11 @@ public class User extends Person {
     }
     public void setLastUpdated(Timestamp lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+    public List<Car> getCars() {
+        return cars;
+    }
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
 }

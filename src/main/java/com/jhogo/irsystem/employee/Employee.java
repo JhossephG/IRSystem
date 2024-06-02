@@ -5,6 +5,7 @@ public class Employee extends Person {
     private String userName;
     private String role;
     private String password;
+    private int storeId;
     
     // Getters and setters for additional fields
     public String getUserName() {
@@ -24,5 +25,11 @@ public class Employee extends Person {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public int getStoreId() {
+        return storeId;
+    }
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 }

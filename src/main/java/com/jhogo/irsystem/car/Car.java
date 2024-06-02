@@ -2,7 +2,7 @@ package com.jhogo.irsystem.car;
 import java.math.BigDecimal;
 public class Car {
 
-    private int manufactureYear,id;
+    private int manufactureYear,id, userId, storeId;
     private BigDecimal saleValue, purchaseValue;
     private String model, brand, chassis;
     private boolean inStore;
@@ -17,6 +17,22 @@ public class Car {
 
     public int getManufactureYear() {
         return manufactureYear;
+    }
+    
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 
     public void setManufactureYear(int manufactureYear) {

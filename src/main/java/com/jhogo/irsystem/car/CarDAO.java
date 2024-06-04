@@ -45,6 +45,56 @@ public class CarDAO {
             return cars;
     }
 
+    public List<Car> getCarsByUserId(int userId) throws SQLException {
+        List<Car> cars = new ArrayList<>();
+        String sql = "SELECT * FROM Car WHERE user_id=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Car car = new Car();
+                    car.setId(resultSet.getInt("id"));
+                    car.setModel(resultSet.getString("model"));
+                    car.setBrand(resultSet.getString("brand"));
+                    car.setChassis(resultSet.getString("chassis"));
+                    car.setManufactureYear(resultSet.getInt("manufactureYear"));
+                    car.setSaleValue(resultSet.getBigDecimal("saleValue"));
+                    car.setPurchaseValue(resultSet.getBigDecimal("purchaseValue"));
+                    car.setInStore(resultSet.getBoolean("inStore"));
+                    car.setStoreId(resultSet.getInt("store_id"));
+                    car.setUserId(resultSet.getInt("user_id"));
+                    cars.add(car);
+                }
+            }
+        }
+        return cars;
+    }
+
+    public List<Car> getCarsByStoreId(int storeId) throws SQLException {
+        List<Car> cars = new ArrayList<>();
+        String sql = "SELECT * FROM Car WHERE store_id=?";
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, storeId);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Car car = new Car();
+                    car.setId(resultSet.getInt("id"));
+                    car.setModel(resultSet.getString("model"));
+                    car.setBrand(resultSet.getString("brand"));
+                    car.setChassis(resultSet.getString("chassis"));
+                    car.setManufactureYear(resultSet.getInt("manufactureYear"));
+                    car.setSaleValue(resultSet.getBigDecimal("saleValue"));
+                    car.setPurchaseValue(resultSet.getBigDecimal("purchaseValue"));
+                    car.setInStore(resultSet.getBoolean("inStore"));
+                    car.setStoreId(resultSet.getInt("store_id"));
+                    car.setUserId(resultSet.getInt("user_id"));
+                    cars.add(car);
+                }
+            }
+        }
+        return cars;
+    }
+
     public void updateCar(Car car) throws SQLException {
         String sql = "UPDATE Car SET model=?, brand=?, chassis=?, manufactureYear=?, saleValue=?, purchaseValue=?, inStore=? WHERE id=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {

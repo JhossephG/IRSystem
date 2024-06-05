@@ -11,7 +11,7 @@ public class EmployeeDAO {
     }
 
     public void insertEmployee(Employee employees) throws SQLException {
-        String sql = "INSERT INTO Employee (name, role, address, username, password, birthday) VALEUS (?,?,?,?,?,?)"; 
+        String sql = "INSERT INTO Employee (name, role, address, username, password, birthday, wage) VALUES (?,?,?,?,?,?,?)";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1, employees.getName());
             statement.setString(2, employees.getRole());
@@ -19,6 +19,7 @@ public class EmployeeDAO {
             statement.setString(4, employees.getUserName());
             statement.setString(5, employees.getPassword());
             statement.setDate(6, employees.getBirthday());
+            statement.setBigDecimal(7, employees.getWage());
             statement.executeUpdate();
         }
     }
@@ -37,6 +38,7 @@ public class EmployeeDAO {
                     employee.setUserName(resultSet.getString("username"));
                     employee.setPassword(resultSet.getString("password"));
                     employee.setBirthday(resultSet.getDate("birthday"));
+                    employee.setWage(resultSet.getBigDecimal("wage"));
                     employees.add(employee);
                 }
             }
@@ -44,7 +46,7 @@ public class EmployeeDAO {
     }
 
     public void updateEmployee (Employee employees) throws SQLException {
-        String sql = "UPDATE Employee SET name=?, role=?, address=?, username=?, password=?, birthday=? WHERE id=?";
+        String sql = "UPDATE Employee SET name=?, role=?, address=?, username=?, password=?, birthday=?, wage=? WHERE id=?";
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, employees.getName());
             statement.setString(2, employees.getRole());
@@ -52,6 +54,7 @@ public class EmployeeDAO {
             statement.setString(4, employees.getUserName());
             statement.setString(5, employees.getPassword());
             statement.setDate(6, employees.getBirthday());
+            statement.setBigDecimal(7, employees.getWage());
             statement.executeUpdate();
         }
     }

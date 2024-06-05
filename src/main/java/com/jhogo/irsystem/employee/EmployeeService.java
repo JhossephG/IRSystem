@@ -18,6 +18,7 @@ public class EmployeeService {
         employees.setPassword(employeesDTO.getPassword());
         employees.setRole(employeesDTO.getRole());
         employees.setUserName(employeesDTO.getUserName());
+        employees.setWage(employeesDTO.getWage());
         employeesDAO.insertEmployee(employees);
     }
 
@@ -32,6 +33,7 @@ public class EmployeeService {
             employeesDTO.setPassword(employee.getPassword());
             employeesDTO.setRole(employee.getRole());
             employeesDTO.setUserName(employee.getUserName());
+            employeesDTO.setWage(employee.getWage());
             return employeesDTO;
         }).collect(Collectors.toList());
     }
@@ -45,6 +47,7 @@ public class EmployeeService {
         employees.setPassword(employeesDTO.getPassword());
         employees.setRole(employeesDTO.getRole());
         employees.setUserName(employeesDTO.getUserName());
+        employees.setWage(employeesDTO.getWage());
         employeesDAO.updateEmployee(employees);
 
     }

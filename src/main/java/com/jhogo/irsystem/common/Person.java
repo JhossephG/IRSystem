@@ -4,6 +4,7 @@ import java.sql.Date;
 public abstract class Person {
     private int id;
     private String name;
+    private String password;
     private String address;
     private Date birthday;
 
@@ -31,5 +32,11 @@ public abstract class Person {
     }
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

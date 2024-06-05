@@ -1,4 +1,3 @@
-
 -- Adicionar a coluna 'address' se ela não existir
 SET @exists = (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='Employee' AND COLUMN_NAME='address');
 SET @sql = IF(@exists = 0, 'ALTER TABLE Employee ADD COLUMN address VARCHAR(200)', 'SELECT "Column address already exists"');

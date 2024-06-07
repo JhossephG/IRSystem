@@ -1,15 +1,23 @@
 package com.jhogo.irsystem.store;
 import java.util.List;
-import com.jhogo.irsystem.car.Car;
+import com.jhogo.irsystem.vehicle.Vehicle;
 import com.jhogo.irsystem.employee.Employee;
+
 import java.math.BigDecimal;
 
 public class Store {
-    private int id, totalOfEmployees, totalOfCars;
-    private String name, address, registerNumber, phoneNumber;
-    private BigDecimal balance, expenses;
+    private int id;
+    private int totalOfEmployees;
+    private int totalOfCars;
+    private String name;
+    private String address;
+    private String registerNumber;
+    private String phoneNumber;
+    private BigDecimal balance;
+    private BigDecimal expenses;
     private List<Employee> employees;
-    private List<Car> cars;
+    private List<Vehicle> cars;
+
     public int getId() {
         return id;
     }
@@ -70,10 +78,10 @@ public class Store {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
-    public List<Car> getCars() {
+    public List<Vehicle> getCars() {
         return cars;
     }
-    public void setCars(List<Car> cars) {
+    public void setCars(List<Vehicle> cars) {
         this.cars = cars;
     } 
 

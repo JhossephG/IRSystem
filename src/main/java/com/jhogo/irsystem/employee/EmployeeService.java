@@ -12,12 +12,12 @@ public class EmployeeService {
 
     private void addEmployee(EmployeeDTO employeesDTO) throws SQLException {
         Employee employees = new Employee();
-        employees.setName(employeesDTO.getName());
+        employees.setFullName(employeesDTO.getFullName());
         employees.setAddress(employeesDTO.getAddress());
-        employees.setBirthday(employeesDTO.getBirthday());
+        employees.setBirthDate(employeesDTO.getBirthDate());
         employees.setPassword(employeesDTO.getPassword());
         employees.setRole(employeesDTO.getRole());
-        employees.setUserName(employeesDTO.getUserName());
+        employees.setUsername(employeesDTO.getUsername());
         employees.setWage(employeesDTO.getWage());
         employeesDAO.insertEmployee(employees);
     }
@@ -27,12 +27,12 @@ public class EmployeeService {
         return employees.stream().map(employee -> {
             EmployeeDTO employeesDTO = new EmployeeDTO();
             employeesDTO.setId(employee.getId());
-            employeesDTO.setName(employee.getName());
+            employeesDTO.setFullName(employee.getFullName());
             employeesDTO.setAddress(employee.getAddress());
-            employeesDTO.setBirthday(employee.getBirthday());
+            employeesDTO.setBirthDate(employee.getBirthDate());
             employeesDTO.setPassword(employee.getPassword());
             employeesDTO.setRole(employee.getRole());
-            employeesDTO.setUserName(employee.getUserName());
+            employeesDTO.setUsername(employee.getUsername());
             employeesDTO.setWage(employee.getWage());
             return employeesDTO;
         }).collect(Collectors.toList());
@@ -41,12 +41,12 @@ public class EmployeeService {
     private void updateEmployee (EmployeeDTO employeesDTO, int employeeId) throws SQLException {
         Employee employees = new Employee();
         employees.setId(employeesDTO.getId());
-        employees.setName(employeesDTO.getName());
+        employees.setFullName(employeesDTO.getFullName());
         employees.setAddress(employeesDTO.getAddress());
-        employees.setBirthday(employeesDTO.getBirthday());
+        employees.setBirthDate(employeesDTO.getBirthDate());
         employees.setPassword(employeesDTO.getPassword());
         employees.setRole(employeesDTO.getRole());
-        employees.setUserName(employeesDTO.getUserName());
+        employees.setUsername(employeesDTO.getUsername());
         employees.setWage(employeesDTO.getWage());
         employeesDAO.updateEmployee(employees);
 

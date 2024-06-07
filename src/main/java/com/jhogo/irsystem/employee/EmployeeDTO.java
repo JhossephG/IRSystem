@@ -4,18 +4,11 @@ import com.jhogo.irsystem.common.Person;
 import java.math.BigDecimal;
 
 public class EmployeeDTO extends Person {
-    private String userName;
     private String role;
     private BigDecimal wage;
     private int storeId;
     
     // Getters and setters for additional fields
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
     public String getRole() {
         return role;
     }

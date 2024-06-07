@@ -11,15 +11,18 @@ public class EmployeeDAO {
     }
 
     public void insertEmployee(Employee employees) throws SQLException {
-        String sql = "INSERT INTO Employee (name, role, address, username, password, birthday, wage) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Employee (fullName, role, address, username, password, birthDate, wage, idNumber, phoneNumber, email) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
-            statement.setString(1, employees.getName());
+            statement.setString(1, employees.getFullName());
             statement.setString(2, employees.getRole());
             statement.setString(3, employees.getAddress());
-            statement.setString(4, employees.getUserName());
+            statement.setString(4, employees.getUsername());
             statement.setString(5, employees.getPassword());
-            statement.setDate(6, employees.getBirthday());
+            statement.setDate(6, employees.getBirthDate());
             statement.setBigDecimal(7, employees.getWage());
+            statement.setString(8, employees.getIdNumber());
+            statement.setString(9, employees.getPhoneNumber());
+            statement.setString(10, employees.getEmail());
             statement.executeUpdate();
         }
     }
@@ -32,13 +35,13 @@ public class EmployeeDAO {
                 while (resultSet.next()) {
                     Employee employee = new Employee();
                     employee.setId(resultSet.getInt("id"));
-                    employee.setName(resultSet.getString("name"));
+                    employee.setFullName(resultSet.getString("fullName"));
                     employee.setRole(resultSet.getString("role"));
-                    employee.setAddress(resultSet.getString("address"));
-                    employee.setUserName(resultSet.getString("username"));
-                    employee.setPassword(resultSet.getString("password"));
-                    employee.setBirthday(resultSet.getDate("birthday"));
-                    employee.setWage(resultSet.getBigDecimal("wage"));
+//                    employee.setAddress(resultSet.getString("address"));
+                    employee.setUsername(resultSet.getString("username"));
+//                    employee.setPassword(resultSet.getString("password"));
+                    employee.setBirthDate(resultSet.getDate("birthDate"));
+//                    employee.setWage(resultSet.getBigDecimal("wage"));
                     employees.add(employee);
                 }
             }
@@ -46,15 +49,18 @@ public class EmployeeDAO {
     }
 
     public void updateEmployee (Employee employees) throws SQLException {
-        String sql = "UPDATE Employee SET name=?, role=?, address=?, username=?, password=?, birthday=?, wage=? WHERE id=?";
+        String sql = "UPDATE Employee SET fullName=?, role=?, address=?, username=?, password=?, birthDate=?, wage=?, idNumber=?, phoneNumber=?, email=? WHERE id=?";
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, employees.getName());
+            statement.setString(1, employees.getFullName());
             statement.setString(2, employees.getRole());
             statement.setString(3, employees.getAddress());
-            statement.setString(4, employees.getUserName());
+            statement.setString(4, employees.getUsername());
             statement.setString(5, employees.getPassword());
-            statement.setDate(6, employees.getBirthday());
+            statement.setDate(6, employees.getBirthDate());
             statement.setBigDecimal(7, employees.getWage());
+            statement.setString(8, employees.getIdNumber());
+            statement.setString(9, employees.getPhoneNumber());
+            statement.setString(10, employees.getEmail());
             statement.executeUpdate();
         }
     }

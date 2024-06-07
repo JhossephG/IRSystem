@@ -1,6 +1,6 @@
-package com.jhogo.irsystem.car;
+package com.jhogo.irsystem.vehicle;
 import java.math.BigDecimal;
-public class CarDTO {
+public class VehicleDTO {
 
     private int manufactureYear,id;
     private BigDecimal saleValue, purchaseValue;

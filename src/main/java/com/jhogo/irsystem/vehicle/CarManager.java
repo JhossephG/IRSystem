@@ -1,4 +1,4 @@
-package com.jhogo.irsystem.car;
+package com.jhogo.irsystem.vehicle;
 // import java.util.ArrayList;
 // import java.util.List;
 
@@ -14,7 +14,7 @@ package com.jhogo.irsystem.car;
 
 //     public void addCar(CarDTO newCar) {
 //         carList.add(newCar);
-//         newCar.setInStore(true);
+//         newCar.setAvailability(true);
 //         printCarsInStore();
 //     }
 
@@ -23,7 +23,7 @@ package com.jhogo.irsystem.car;
 //         if(carIndex >=0 && carIndex < carList.size()) {
 //             for (CarDTO car : carList) {
 //                 if (index == carIndex) {
-//                     car.setInStore(false);
+//                     car.setAvailability(false);
 //                     System.out.println("O veiculo " + car.getModel() + " foi colocado como fora de estoque!");
 //                 }
 //             }
@@ -45,11 +45,11 @@ package com.jhogo.irsystem.car;
 //     public void printCarsInStore () {
 //         for (int i = 0; i < carList.size(); i++) {
 //             CarDTO car = carList.get(i);
-//             if(car.isInStore()) {
+//             if(car.isAvailability()) {
 //                 System.out.println( "Chave: " + i +
 //                 ", Modelo: " + car.getModel() +
 //                 ", Marca: " + car.getBrand() +
-//                 ", Chassi: " + car.getChassis() +
+//                 ", Chassi: " + car.getVehicleIdNumber() +
 //                 ", Ano de Fabricação: " + car.getManufactureYear() +
 //                 ", Valor de Venda: " + car.getSaleValue() +
 //                 ", Valor de Compra: " + car.getPurchaseValue()
@@ -61,11 +61,11 @@ package com.jhogo.irsystem.car;
 //     public void printCarsOutStore () {
 //         for (int i = 0; i < carList.size(); i++) {
 //             CarDTO car = carList.get(i);
-//             if(!car.isInStore()) {
+//             if(!car.isAvailability()) {
 //                 System.out.println( "Chave: " + i +
 //                 ", Modelo: " + car.getModel() +
 //                 ", Marca: " + car.getBrand() +
-//                 ", Chassi: " + car.getChassis() +
+//                 ", Chassi: " + car.getVehicleIdNumber() +
 //                 ", Ano de Fabricação: " + car.getManufactureYear() +
 //                 ", Valor de Venda: " + car.getSaleValue() +
 //                 ", Valor de Compra: " + car.getPurchaseValue()
@@ -80,7 +80,7 @@ package com.jhogo.irsystem.car;
 //             System.out.println( "Chave: " + i +
 //             ", Modelo: " + car.getModel() +
 //             ", Marca: " + car.getBrand() +
-//             ", Chassi: " + car.getChassis() +
+//             ", Chassi: " + car.getVehicleIdNumber() +
 //             ", Ano de Fabricação: " + car.getManufactureYear() +
 //             ", Valor de Venda: " + car.getSaleValue() +
 //             ", Valor de Compra: " + car.getPurchaseValue()

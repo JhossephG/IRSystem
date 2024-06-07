@@ -1,6 +1,4 @@
 package com.jhogo.irsystem.user;
-import com.jhogo.irsystem.car.CarDAO;
-import com.jhogo.irsystem.car.CarDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,9 +14,9 @@ public class UserService {
     public void addUser (UserDTO userDTO) throws SQLException{
         User user = new User();
         user.setId(userDTO.getId());
-        user.setName(userDTO.getName());
+        user.setFullName(userDTO.getFullName());
         user.setAddress(userDTO.getAddress());
-        user.setBirthday(userDTO.getBirthday());
+        user.setBirthDate(userDTO.getBirthDate());
         user.setPassword(userDTO.getPassword());
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setIdNumber(userDTO.getIdNumber());
@@ -32,9 +30,9 @@ public class UserService {
         return users.stream().map(user -> {
             UserDTO userDTO = new UserDTO();
             userDTO.setId(user.getId());
-            userDTO.setName(user.getName());
+            userDTO.setFullName(user.getFullName());
             userDTO.setAddress(user.getAddress());
-            userDTO.setBirthday(user.getBirthday());
+            userDTO.setBirthDate(user.getBirthDate());
             userDTO.setPassword(user.getPassword());
             userDTO.setPhoneNumber(user.getPhoneNumber());
             userDTO.setIdNumber(user.getIdNumber());
@@ -46,9 +44,9 @@ public class UserService {
     public void updateUser (UserDTO userDTO) throws SQLException {
         User user = new User();
         user.setId(userDTO.getId());
-        user.setName(userDTO.getName());
+        user.setFullName(userDTO.getFullName());
         user.setAddress(userDTO.getAddress());
-        user.setBirthday(userDTO.getBirthday());
+        user.setBirthDate(userDTO.getBirthDate());
         user.setPassword(userDTO.getPassword());
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setIdNumber(userDTO.getIdNumber());

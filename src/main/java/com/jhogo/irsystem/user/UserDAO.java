@@ -2,9 +2,6 @@ package com.jhogo.irsystem.user;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.jhogo.irsystem.car.Car;
-
-import javax.swing.plaf.nimbus.State;
 
 public class UserDAO {
     private Connection connection;
@@ -14,11 +11,11 @@ public class UserDAO {
     }
 
     public void insertUser (User user) throws SQLException {
-        String sql = "INSERT * INTO User (name, address, birthday, idNumber, password, phoneNumber, email, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT * INTO User (name, address, birthDate, idNumber, password, phoneNumber, email, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, user.getName());
+            statement.setString(1, user.getFullName());
             statement.setString(2, user.getAddress());
-            statement.setDate(3, user.getBirthday());
+            statement.setDate(3, user.getBirthDate());
             statement.setString(4, user.getIdNumber());
             statement.setString(5, user.getPassword());
             statement.setString(6, user.getPhoneNumber());
@@ -48,8 +45,8 @@ public class UserDAO {
                     user.setPhoneNumber(rs.getString("password"));
                     user.setPhoneNumber(rs.getString("phoneNumber"));
                     user.setAddress(rs.getString("address"));
-                    user.setBirthday(rs.getDate("birthday"));
-                    user.setName(rs.getString("name"));
+                    user.setBirthDate(rs.getDate("birthDate"));
+                    user.setFullName(rs.getString("name"));
                     return user;
                 }
             }
@@ -71,8 +68,8 @@ public class UserDAO {
                     user.setPassword(rs.getString("password"));
                     user.setPhoneNumber(rs.getString("phoneNumber"));
                     user.setAddress(rs.getString("address"));
-                    user.setBirthday(rs.getDate("birthday"));
-                    user.setName(rs.getString("name"));
+                    user.setBirthDate(rs.getDate("birthDate"));
+                    user.setFullName(rs.getString("name"));
                     users.add(user);
                 }
             }
@@ -80,11 +77,11 @@ public class UserDAO {
     }
 
     public void updateUser (User user) throws  SQLException{
-        String sql = "UPDATE User SET name=?, address=?, birthday=?, idNumber=?, password=?, phoneNumber=?, email=?, lastUpdated=?, WHERE id=?";
+        String sql = "UPDATE User SET name=?, address=?, birthDate=?, idNumber=?, password=?, phoneNumber=?, email=?, lastUpdated=?, WHERE id=?";
             try(PreparedStatement pst = connection.prepareStatement(sql)) {
-                pst.setString(1, user.getName());
+                pst.setString(1, user.getFullName());
                 pst.setString(2, user.getAddress());
-                pst.setDate(3, user.getBirthday());
+                pst.setDate(3, user.getBirthDate());
                 pst.setString(4, user.getIdNumber());
                 pst.setString(5, user.getPassword());
                 pst.setString(6, user.getPhoneNumber());

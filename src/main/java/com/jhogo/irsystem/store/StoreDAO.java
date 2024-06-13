@@ -1,5 +1,7 @@
 package com.jhogo.irsystem.store;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StoreDAO {
     private Connection connection;
@@ -17,5 +19,17 @@ public class StoreDAO {
             pst.setBigDecimal(4, store.getBalance());
             pst.executeUpdate();
         }
+    }
+    public List<Integer> getStoreId () throws SQLException{
+        List<Integer> ids = new ArrayList<>();
+        String sql = "SELECT * FROM Store";
+        try (Statement stmt = connection.createStatement();
+        ResultSet result = stmt.executeQuery(sql)) {
+            while (result.next()) {
+               int id = result.getInt("id");
+               ids.add(id);
+            }
+        }
+        return ids;
     }
 }

@@ -14,11 +14,11 @@ public class VehicleService {
         Vehicle car = new Vehicle();
         car.setModel(vehicleDTO.getModel());
         car.setBrand(vehicleDTO.getBrand());
-        car.setVehicleIdNumber(vehicleDTO.getChassis());
+        car.setVehicleIdNumber(vehicleDTO.getVehicleIdNumber());
         car.setManufactureYear(vehicleDTO.getManufactureYear());
         car.setSaleValue(vehicleDTO.getSaleValue());
         car.setPurchaseValue(vehicleDTO.getPurchaseValue());
-        car.setAvailability(vehicleDTO.isInStore());
+        car.setAvailability(vehicleDTO.isAvailability());
         vehicleDAO.insertVehicle(car);
     }
 
@@ -29,11 +29,11 @@ public class VehicleService {
             vehicleDTO.setId(car.getId());
             vehicleDTO.setModel(car.getModel());
             vehicleDTO.setBrand(car.getBrand());
-            vehicleDTO.setChassis(car.getVehicleIdNumber());
+            vehicleDTO.setVehicleIdNumber(car.getVehicleIdNumber());
             vehicleDTO.setManufactureYear(car.getManufactureYear());
             vehicleDTO.setSaleValue(car.getSaleValue());
             vehicleDTO.setPurchaseValue(car.getPurchaseValue());
-            vehicleDTO.setInStore(car.isAvailability());
+            vehicleDTO.setAvailability(car.isAvailability());
             return vehicleDTO;
         }).collect(Collectors.toList());
     }
@@ -43,11 +43,11 @@ public class VehicleService {
         car.setId(carId);
         car.setModel(vehicleDTO.getModel());
         car.setBrand(vehicleDTO.getBrand());
-        car.setVehicleIdNumber(vehicleDTO.getChassis());
+        car.setVehicleIdNumber(vehicleDTO.getVehicleIdNumber());
         car.setManufactureYear(vehicleDTO.getManufactureYear());
         car.setSaleValue(vehicleDTO.getSaleValue());
         car.setPurchaseValue(vehicleDTO.getPurchaseValue());
-        car.setAvailability(vehicleDTO.isInStore());
+        car.setAvailability(vehicleDTO.isAvailability());
         vehicleDAO.updateVehicle(car);
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StoreService {
-   private StoreDAO storeDAO;
+   private final StoreDAO storeDAO;
    private StoreService storeService;
    private FinanceDAO financeDAO;
    private FinanceService financeService;

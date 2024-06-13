@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EmployeeService {
-    private EmployeeDAO employeesDAO;
+    private final EmployeeDAO employeesDAO;
 
-    private void employeesService (EmployeeDAO employeesDAO){
+    private EmployeeService (EmployeeDAO employeesDAO){
         this.employeesDAO = employeesDAO;
     }
 

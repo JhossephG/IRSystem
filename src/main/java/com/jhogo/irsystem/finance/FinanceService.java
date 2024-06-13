@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 // The purpose of this class is to follow the SRP (Single Responsibility Principle) representing the financial logic
 public class FinanceService {
-    private FinanceDAO financeDAO;
+    private final FinanceDAO financeDAO;
 
     public FinanceService(FinanceDAO financeDAO) {
         this.financeDAO = financeDAO;

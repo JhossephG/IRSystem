@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class VehicleService {
-    private VehicleDAO vehicleDAO;
+    private final VehicleDAO vehicleDAO;
 
-    public void CarService(VehicleDAO vehicleDAO) {
+    public VehicleService(VehicleDAO vehicleDAO) {
         this.vehicleDAO = vehicleDAO;
     }
 

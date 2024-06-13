@@ -1,36 +1,20 @@
-CREATE TABLE Store (
+-- V1__Initial_schema.sql
+CREATE TABLE Employee (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100),
+    name VARCHAR(255) NOT NULL,
+    position VARCHAR(255),
     address VARCHAR(255)
 );
 
-CREATE TABLE Car (
+CREATE TABLE Vehicle (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    model VARCHAR(100),
-    brand VARCHAR(100),
-    chassis VARCHAR(100),
-    manufactureYear INT,
-    saleValue DECIMAL(10, 2),
-    purchaseValue DECIMAL(10, 2),
-    inStore BOOLEAN,
-    store_id INT,
-    FOREIGN KEY (store_id) REFERENCES Store(id)
+    make VARCHAR(255),
+    model VARCHAR(255),
+    year INT
 );
 
-CREATE TABLE Client (
+CREATE TABLE User (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100),
-    contact VARCHAR(100),
-    store_id INT,
-    FOREIGN KEY (store_id) REFERENCES Store(id)
-);
-
-CREATE TABLE Employee (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100),
-    role VARCHAR(50),
-    username VARCHAR(100),
-    password VARCHAR(100),
-    store_id INT,
-    FOREIGN KEY (store_id) REFERENCES Store(id)
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
 );

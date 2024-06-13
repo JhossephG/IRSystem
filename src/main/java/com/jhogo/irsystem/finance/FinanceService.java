@@ -18,4 +18,12 @@ public class FinanceService {
         expense.setCarId(carId);
         financeDAO.insertExpense(expense);
     }
+
+    public void addToBalance (BigDecimal value, int storeId) throws SQLException {
+        if(value.compareTo(BigDecimal.ZERO) < 0)  {
+            System.out.println("Negative values are not allowed.");
+            return;
+        }
+        financeDAO.addToBalance(value, storeId);
+    }
 }

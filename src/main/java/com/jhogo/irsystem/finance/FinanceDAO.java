@@ -1,5 +1,6 @@
 package com.jhogo.irsystem.finance;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -23,6 +24,14 @@ public class FinanceDAO {
                 statement.setNull(3, Types.INTEGER);
             }
             statement.executeUpdate();
+        }
+    }
+
+    public void addToBalance(BigDecimal value, int storeId) throws  SQLException{
+        String sql = "UPDATE Store SET balance=balance + ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setBigDecimal(1, value);
+            stmt.executeUpdate();
         }
     }
 }

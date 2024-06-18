@@ -1,5 +1,6 @@
 package com.jhogo.irsystem.vehicle;
-import com.jhogo.irsystem.store.Store;
+import com.jhogo.irsystem.model.Store;
+import com.jhogo.irsystem.model.Vehicle;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

@@ -1,7 +1,11 @@
 package com.jhogo.irsystem.store;
 
-import com.jhogo.irsystem.vehicle.VehicleDTO;
-import com.jhogo.irsystem.vehicle.VehicleService;
+import com.jhogo.irsystem.dto.StoreDTO;
+import com.jhogo.irsystem.dto.VehicleDTO;
+import com.jhogo.irsystem.model.Store;
+import com.jhogo.irsystem.repository.StoreDAO;
+import com.jhogo.irsystem.service.StoreService;
+import com.jhogo.irsystem.service.VehicleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

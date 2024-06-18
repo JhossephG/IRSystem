@@ -42,6 +42,20 @@ public class VehicleService {
         }).collect(Collectors.toList());
     }
 
+    public VehicleDTO getVehicleById (int vehicleId) throws SQLException {
+        Vehicle vehicle = vehicleDAO.getVehicleById(vehicleId);
+        VehicleDTO vehicleDTO = new VehicleDTO();
+        vehicleDTO.setId(vehicle.getId());
+        vehicleDTO.setModel(vehicle.getModel());
+        vehicleDTO.setBrand(vehicle.getBrand());
+        vehicleDTO.setVehicleIdNumber(vehicle.getVehicleIdNumber());
+        vehicleDTO.setManufactureYear(vehicle.getManufactureYear());
+        vehicleDTO.setSaleValue(vehicle.getSaleValue());
+        vehicleDTO.setPurchaseValue(vehicle.getPurchaseValue());
+        vehicleDTO.setAvailability(vehicle.isAvailability());
+        return vehicleDTO;
+    }
+
     public void updateCar(VehicleDTO vehicleDTO, int carId) throws SQLException {
         Vehicle car = new Vehicle();
         car.setId(carId);
@@ -55,7 +69,7 @@ public class VehicleService {
         vehicleDAO.updateVehicle(car);
     }
 
-    public void removeCarFromStore(int carId) throws SQLException {
-        vehicleDAO.deleteVehicle(carId);
+    public void deleteVehicle(int vehicleId) throws SQLException {
+        vehicleDAO.deleteVehicle(vehicleId);
     }
 }

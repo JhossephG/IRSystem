@@ -47,6 +47,28 @@ public class VehicleDAO {
             return cars;
     }
 
+    public Vehicle getVehicleById (int vehicleId) throws SQLException {
+        String sql = "SELECT * FROM Vehicle WHERE id = ?";
+       try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+           stmt.setInt(1, vehicleId);
+           try (ResultSet result = stmt.executeQuery()) {
+               if (result.next()) {
+                   Vehicle vehicle = new Vehicle();
+                   vehicle.setId(result.getInt("id"));
+                   vehicle.setModel(result.getString("model"));
+                   vehicle.setBrand(result.getString("brand"));
+                   vehicle.setVehicleIdNumber(result.getString("vehicleIdNumber"));
+                   vehicle.setManufactureYear(result.getInt("manufactureYear"));
+                   vehicle.setSaleValue(result.getBigDecimal("saleValue"));
+                   vehicle.setPurchaseValue(result.getBigDecimal("purchaseValue"));
+                   vehicle.setAvailability(result.getBoolean("availability"));
+                   return vehicle;
+               }
+           }
+       }
+       return null;
+    }
+
     public List<Vehicle> getVehiclesByUserId(int userId) throws SQLException {
         List<Vehicle> cars = new ArrayList<>();
         String sql = "SELECT * FROM Car WHERE user_id=?";

@@ -45,6 +45,20 @@ public class UserService {
         }).collect(Collectors.toList());
     }
 
+    public UserDTO getUserById (int id) throws SQLException{
+       UserDTO userDTO = new UserDTO();
+       User user = userDAO.getUserById(id);
+           userDTO.setId(user.getId());
+           userDTO.setFullName(user.getFullName());
+           userDTO.setAddress(user.getAddress());
+           userDTO.setBirthDate(user.getBirthDate());
+           userDTO.setPassword(user.getPassword());
+           userDTO.setPhoneNumber(user.getPhoneNumber());
+           userDTO.setIdNumber(user.getIdNumber());
+           userDTO.setEmail(user.getEmail());
+           return userDTO;
+    }
+
     public void updateUser (UserDTO userDTO) throws SQLException {
         User user = new User();
         user.setId(userDTO.getId());

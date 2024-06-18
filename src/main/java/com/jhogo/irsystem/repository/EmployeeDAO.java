@@ -28,6 +28,31 @@ public class EmployeeDAO {
             statement.executeUpdate();
         }
     }
+
+    public Employee getEmployeeById (int employeeId) throws SQLException {
+        String sql = "SELECT * FROM Employee WHERE id=?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, employeeId);
+            try (ResultSet result = stmt.executeQuery()) {
+                if (result.next()) {
+                    Employee employee = new Employee();
+                    employee.setId(result.getInt("id"));
+                    employee.setEmail(result.getString("email"));
+                    employee.setIdNumber(result.getString("idNumber"));
+                    employee.setPhoneNumber(result.getString("password"));
+                    employee.setPhoneNumber(result.getString("phoneNumber"));
+                    employee.setAddress(result.getString("address"));
+                    employee.setBirthDate(result.getDate("birthDate"));
+                    employee.setFullName(result.getString("name"));
+                    employee.setRole(result.getString("role"));
+                    employee.setWage(result.getBigDecimal("wage"));
+                    employee.setStoreId(result.getInt("store_id"));
+                    return employee;
+                }
+            }
+        }
+        return null;
+    }
     
     public List<Employee> getAllEmployees () throws SQLException {
         List<Employee> employees = new ArrayList<>();

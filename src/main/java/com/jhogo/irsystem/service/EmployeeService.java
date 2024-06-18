@@ -14,7 +14,7 @@ public class EmployeeService {
         this.employeesDAO = employeesDAO;
     }
 
-    private void addEmployee(EmployeeDTO employeesDTO) throws SQLException {
+    public void addEmployee(EmployeeDTO employeesDTO) throws SQLException {
         Employee employees = new Employee();
         employees.setFullName(employeesDTO.getFullName());
         employees.setAddress(employeesDTO.getAddress());
@@ -26,7 +26,24 @@ public class EmployeeService {
         employeesDAO.insertEmployee(employees);
     }
 
-    private List<EmployeeDTO> getAllEmployees() throws SQLException {
+    public EmployeeDTO getEmployeeById (int employeeId) throws SQLException {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        Employee employee = employeesDAO.getEmployeeById(employeeId);
+            employeeDTO.setId(employee.getId());
+            employeeDTO.setEmail(employee.getEmail());
+            employeeDTO.setIdNumber(employee.getIdNumber());
+            employeeDTO.setPassword(employee.getPassword());
+            employeeDTO.setPhoneNumber(employee.getPhoneNumber());
+            employeeDTO.setAddress(employee.getAddress());
+            employeeDTO.setBirthDate(employee.getBirthDate());
+            employeeDTO.setFullName(employee.getFullName());
+            employeeDTO.setRole(employee.getRole());
+            employeeDTO.setWage(employee.getWage());
+            employeeDTO.setStoreId(employee.getStoreId());
+            return employeeDTO;
+    }
+
+    public List<EmployeeDTO> getAllEmployees() throws SQLException {
         List<Employee> employees = employeesDAO.getAllEmployees();
         return employees.stream().map(employee -> {
             EmployeeDTO employeesDTO = new EmployeeDTO();
@@ -42,7 +59,7 @@ public class EmployeeService {
         }).collect(Collectors.toList());
     }
 
-    private void updateEmployee (EmployeeDTO employeesDTO, int employeeId) throws SQLException {
+    public void updateEmployee (EmployeeDTO employeesDTO, int employeeId) throws SQLException {
         Employee employees = new Employee();
         employees.setId(employeesDTO.getId());
         employees.setFullName(employeesDTO.getFullName());
@@ -56,7 +73,7 @@ public class EmployeeService {
 
     }
 
-    private void removeEmployee(int employeeId) throws SQLException {
+    public void deleteEmployee(int employeeId) throws SQLException {
         employeesDAO.deleteEmployee(employeeId);
     }
 }

@@ -35,9 +35,9 @@ public class UserDAO {
 
     public User getUserById (int userId) throws SQLException {
         String sql = "SELECT * FROM User WHERE id=?";
-        try(PreparedStatement pst = connection.prepareStatement(sql)) {
+        try (PreparedStatement pst = connection.prepareStatement(sql)) {
             pst.setInt(1, userId);
-            try(ResultSet rs = pst.executeQuery()){
+            try (ResultSet rs = pst.executeQuery()){
                 if(rs.next()){
                     User user = new User();
                     user.setId(rs.getInt("id"));

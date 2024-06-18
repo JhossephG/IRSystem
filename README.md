@@ -29,6 +29,9 @@ This project are licensed under the [GNU GPL v3.0](LICENSE.txt).
 
 © Jhosseph Pathryck de Souza Gonzalez. All rights reserved.
 
+## Figma link w/ workflow and etc
+https://www.figma.com/board/f2Y97vUhj2KYLVTs059Fxr/Untitled?node-id=921-517&t=a1ghsiciH1sNn11u-0
+
 ## Environment Variables
 
 The following environment variables need to be set for the application to run properly:
@@ -44,11 +47,7 @@ export DATABASE_URL="jdbc:mysql://localhost:3306/car_store"
 export DATABASE_USERNAME="root"
 export DATABASE_PASSWORD="your_secure_password"
 
-
-#Figma link w/ workflow and etc
-https://www.figma.com/board/f2Y97vUhj2KYLVTs059Fxr/Untitled?node-id=921-517&t=a1ghsiciH1sNn11u-0
-
-### IRSystem Project Summary
+```
 
 #### Project Structure
 ```
@@ -62,42 +61,55 @@ IRSystem$
 │   ├── classes
 │   │   ├── java
 │   │   │   ├── main
-│   │   │   │   └── src
-│   │   │   │       └── main
-│   │   │   │           └── java
-│   │   │   │               └── com
-│   │   │   │                   └── jhogo
-│   │   │   │                       └── irsystem
-│   │   │   │                           ├── cars
-│   │   │   │                           │   ├── Car.class
-│   │   │   │                           │   ├── CarDAO.class
-│   │   │   │                           │   ├── CarDTO.class
-│   │   │   │                           │   └── CarService.class
-│   │   │   │                           ├── employees
-│   │   │   │                           │   ├── Employees.class
-│   │   │   │                           │   ├── EmployeesDAO.class
-│   │   │   │                           │   ├── EmployeesDTO.class
-│   │   │   │                           │   └── EmployeesService.class
-│   │   │   │                           ├── spending
-│   │   │   │                           │   └── Spending.class
-│   │   │   │                           └── store
-│   │   │   │                               └── Store.class
+│   │   │   │   └── com
+│   │   │   │       └── jhogo
+│   │   │   │           └── irsystem
+│   │   │   │               ├── Application.class
+│   │   │   │               ├── common
+│   │   │   │               │   └── Person.class
+│   │   │   │               ├── config
+│   │   │   │               │   └── DataSourceConfig.class
+│   │   │   │               ├── controller
+│   │   │   │               │   ├── EmployeeController.class
+│   │   │   │               │   ├── FinanceController.class
+│   │   │   │               │   ├── StoreController.class
+│   │   │   │               │   ├── UserController.class
+│   │   │   │               │   └── VehicleController.class
+│   │   │   │               ├── dto
+│   │   │   │               │   ├── EmployeeDTO.class
+│   │   │   │               │   ├── FinanceDTO.class
+│   │   │   │               │   ├── StoreDTO.class
+│   │   │   │               │   ├── UserDTO.class
+│   │   │   │               │   └── VehicleDTO.class
+│   │   │   │               ├── model
+│   │   │   │               │   ├── Employee.class
+│   │   │   │               │   ├── Finance.class
+│   │   │   │               │   ├── Store.class
+│   │   │   │               │   ├── User.class
+│   │   │   │               │   └── Vehicle.class
+│   │   │   │               ├── repository
+│   │   │   │               │   ├── EmployeeDAO.class
+│   │   │   │               │   ├── FinanceDAO.class
+│   │   │   │               │   ├── StoreDAO.class
+│   │   │   │               │   ├── UserDAO.class
+│   │   │   │               │   └── VehicleDAO.class
+│   │   │   │               └── service
+│   │   │   │                   ├── EmployeeService.class
+│   │   │   │                   ├── FinanceService.class
+│   │   │   │                   ├── StoreService.class
+│   │   │   │                   ├── UserService.class
+│   │   │   │                   └── VehicleService.class
 │   │   │   └── test
-│   │   │       └── src
-│   │   │           └── test
-│   │   │               └── java
-│   │   │                   └── com
-│   │   │                       └── jhogo
-│   │   │                           └── irsystem
-│   │   │                               ├── CarDAOIntegrationTest.class
-│   │   │                               └── CarServiceTest.class
+│   │   │       └── com
+│   │   │           └── jhogo
+│   │   │               └── irsystem
+│   │   │                   ├── store
+│   │   │                   │   └── StoreServiceTest.class
+│   │   │                   └── vehicle
+│   │   │                       ├── VehicleDAOIntegrationTest.class
+│   │   │                       └── VehicleServiceTest.class
 │   │   └── kotlin
 │   │       ├── main
-│   │       │   ├── com
-│   │       │   │   └── jhogo
-│   │       │   │       └── irsystem
-│   │       │   │           ├── Application.class
-│   │       │   │           └── ApplicationKt.class
 │   │       │   └── META-INF
 │   │       │       └── IRSystem.kotlin_module
 │   │       └── test
@@ -144,20 +156,13 @@ IRSystem$
 │   │   │   │   │   │       ├── class-fq-name-to-source.tab.keystream.len
 │   │   │   │   │   │       ├── class-fq-name-to-source.tab.len
 │   │   │   │   │   │       ├── class-fq-name-to-source.tab.values.at
-│   │   │   │   │   │       ├── internal-name-to-source.tab
-│   │   │   │   │   │       ├── internal-name-to-source.tab_i
-│   │   │   │   │   │       ├── internal-name-to-source.tab_i.len
-│   │   │   │   │   │       ├── internal-name-to-source.tab.keystream
-│   │   │   │   │   │       ├── internal-name-to-source.tab.keystream.len
-│   │   │   │   │   │       ├── internal-name-to-source.tab.len
-│   │   │   │   │   │       ├── internal-name-to-source.tab.values.at
-│   │   │   │   │   │       ├── package-parts.tab
-│   │   │   │   │   │       ├── package-parts.tab_i
-│   │   │   │   │   │       ├── package-parts.tab_i.len
-│   │   │   │   │   │       ├── package-parts.tab.keystream
-│   │   │   │   │   │       ├── package-parts.tab.keystream.len
-│   │   │   │   │   │       ├── package-parts.tab.len
-│   │   │   │   │   │       ├── package-parts.tab.values.at
+│   │   │   │   │   │       ├── java-sources-proto-map.tab
+│   │   │   │   │   │       ├── java-sources-proto-map.tab_i
+│   │   │   │   │   │       ├── java-sources-proto-map.tab_i.len
+│   │   │   │   │   │       ├── java-sources-proto-map.tab.keystream
+│   │   │   │   │   │       ├── java-sources-proto-map.tab.keystream.len
+│   │   │   │   │   │       ├── java-sources-proto-map.tab.len
+│   │   │   │   │   │       ├── java-sources-proto-map.tab.values.at
 │   │   │   │   │   │       ├── proto.tab
 │   │   │   │   │   │       ├── proto.tab_i
 │   │   │   │   │   │       ├── proto.tab_i.len
@@ -171,33 +176,34 @@ IRSystem$
 │   │   │   │   │   │       ├── source-to-classes.tab.keystream
 │   │   │   │   │   │       ├── source-to-classes.tab.keystream.len
 │   │   │   │   │   │       ├── source-to-classes.tab.len
-│   │   │   │   │   │       └── source-to-classes.tab.values.at
+│   │   │   │   │   │       ├── source-to-classes.tab.values.at
+│   │   │   │   │   │       ├── subtypes.tab
+│   │   │   │   │   │       ├── subtypes.tab_i
+│   │   │   │   │   │       ├── subtypes.tab_i.len
+│   │   │   │   │   │       ├── subtypes.tab.keystream
+│   │   │   │   │   │       ├── subtypes.tab.keystream.len
+│   │   │   │   │   │       ├── subtypes.tab.len
+│   │   │   │   │   │       ├── subtypes.tab.values.at
+│   │   │   │   │   │       ├── supertypes.tab
+│   │   │   │   │   │       ├── supertypes.tab_i
+│   │   │   │   │   │       ├── supertypes.tab_i.len
+│   │   │   │   │   │       ├── supertypes.tab.keystream
+│   │   │   │   │   │       ├── supertypes.tab.keystream.len
+│   │   │   │   │   │       ├── supertypes.tab.len
+│   │   │   │   │   │       └── supertypes.tab.values.at
 │   │   │   │   │   └── lookups
-│   │   │   │   │       ├── counters.tab
-│   │   │   │   │       ├── file-to-id.tab
-│   │   │   │   │       ├── file-to-id.tab_i
-│   │   │   │   │       ├── file-to-id.tab_i.len
-│   │   │   │   │       ├── file-to-id.tab.keystream
-│   │   │   │   │       ├── file-to-id.tab.keystream.len
-│   │   │   │   │       ├── file-to-id.tab.len
-│   │   │   │   │       ├── file-to-id.tab.values.at
-│   │   │   │   │       ├── id-to-file.tab
-│   │   │   │   │       ├── id-to-file.tab.keystream
-│   │   │   │   │       ├── id-to-file.tab.keystream.len
-│   │   │   │   │       ├── id-to-file.tab.len
-│   │   │   │   │       ├── id-to-file.tab.values.at
-│   │   │   │   │       ├── lookups.tab
-│   │   │   │   │       ├── lookups.tab_i
-│   │   │   │   │       ├── lookups.tab_i.len
-│   │   │   │   │       ├── lookups.tab.keystream
-│   │   │   │   │       ├── lookups.tab.keystream.len
-│   │   │   │   │       ├── lookups.tab.len
-│   │   │   │   │       └── lookups.tab.values.at
 │   │   │   │   └── last-build.bin
 │   │   │   └── localstate
 │   │   │       └── build-history.bin
 │   │   ├── compileTestKotlin
-│   │   │   └── cacheable
+│   │   │   ├── cacheable
+│   │   │   │   ├── caches-jvm
+│   │   │   │   │   ├── inputs
+│   │   │   │   │   ├── jvm
+│   │   │   │   │   └── lookups
+│   │   │   │   └── last-build.bin
+│   │   │   └── localstate
+│   │   │       └── build-history.bin
 │   │   ├── IRSystem001SNAPSHOTplainjar-classes.txt
 │   │   └── sessions
 │   ├── libs
@@ -206,34 +212,67 @@ IRSystem$
 │   ├── reports
 │   │   └── tests
 │   │       └── test
+│   │           ├── classes
+│   │           │   └── com.jhogo.irsystem.store.StoreServiceTest.html
 │   │           ├── css
 │   │           │   ├── base-style.css
 │   │           │   └── style.css
 │   │           ├── index.html
-│   │           └── js
-│   │               └── report.js
+│   │           ├── js
+│   │           │   └── report.js
+│   │           └── packages
+│   │               └── com.jhogo.irsystem.store.html
 │   ├── resources
-│   │   └── main
-│   │       ├── application.yml
-│   │       └── db
-│   │           └── migration
-│   │               ├── V1__Initial_schema.sql
-│   │               └── V2__Add_new_employee_fields.sql
+│   │   ├── main
+│   │   │   ├── application.yml
+│   │   │   └── db
+│   │   │       └── migration
+│   │   │           ├── V1__Initial_schema.sql
+│   │   │           ├── V2__Add_new_employee_fields.sql
+│   │   │           ├── V3__Update_schema_with_relationship_fields.sql
+│   │   │           ├── V4__Update_schema_with_user_table.sql
+│   │   │           ├── V5__Update_schema_with_wage_to_employee.sql
+│   │   │           └── V6__Create_finance_table.sql
+│   │   └── test
+│   │       └── application-test.properties
 │   ├── scripts
 │   │   ├── IRSystem
 │   │   └── IRSystem.bat
+│   ├── snapshot
+│   │   └── kotlin
 │   ├── test-results
 │   │   └── test
-│   │       └── binary
-│   │           ├── output.bin
-│   │           ├── output.bin.idx
-│   │           └── results.bin
+│   │       ├── binary
+│   │       │   ├── output.bin
+│   │       │   ├── output.bin.idx
+│   │       │   └── results.bin
+│   │       └── TEST-com.jhogo.irsystem.store.StoreServiceTest.xml
 │   └── tmp
 │       ├── bootJar
 │       │   └── MANIFEST.MF
 │       ├── compileJava
+│       │   ├── compileTransaction
+│       │   │   ├── backup-dir
+│       │   │   └── stash-dir
+│       │   │       ├── DataSourceConfig.class.uniqueId12
+│       │   │       ├── EmployeeController.class.uniqueId11
+│       │   │       ├── EmployeeDAO.class.uniqueId10
+│       │   │       ├── EmployeeService.class.uniqueId4
+│       │   │       ├── FinanceController.class.uniqueId7
+│       │   │       ├── FinanceDTO.class.uniqueId3
+│       │   │       ├── StoreController.class.uniqueId6
+│       │   │       ├── StoreService.class.uniqueId2
+│       │   │       ├── UserController.class.uniqueId5
+│       │   │       ├── UserDAO.class.uniqueId0
+│       │   │       ├── UserService.class.uniqueId9
+│       │   │       ├── VehicleController.class.uniqueId1
+│       │   │       ├── VehicleDAO.class.uniqueId13
+│       │   │       └── VehicleService.class.uniqueId8
 │       │   └── previous-compilation-data.bin
 │       ├── compileTestJava
+│       │   ├── compileTransaction
+│       │   │   ├── backup-dir
+│       │   │   └── stash-dir
 │       │   └── previous-compilation-data.bin
 │       ├── jar
 │       │   └── MANIFEST.MF
@@ -247,6 +286,7 @@ IRSystem$
 │       └── gradle-wrapper.properties
 ├── gradlew
 ├── gradlew.bat
+├── LICENSE.txt
 ├── Menu.java
 ├── README.md
 ├── settings.gradle.kts
@@ -256,46 +296,80 @@ IRSystem$
     │   │   └── com
     │   │       └── jhogo
     │   │           └── irsystem
-    │   │               ├── cars
-    │   │               │   ├── CarDAO.java
-    │   │               │   ├── CarDTO.java
-    │   │               │   ├── Car.java
-    │   │               │   ├── CarManager.java
-    │   │               │   └── CarService.java
-    │   │               ├── employees
-    │   │               │   ├── EmployeesDAO.java
-    │   │               │   ├── EmployeesDTO.java
-    │   │               │   ├── Employees.java
-    │   │               │   └── EmployeesService.java
-    │   │               ├── spending
-    │   │               │   └── Spending.java
-    │   │               ├── store
-    │   │               │   └── Store.java
-    │   │               └── users
-    │   │                   ├── UserDAO.java
-    │   │                   ├── UserDTO.java
-    │   │                   ├── User.java
-    │   │                   └── UserService.java
+    │   │               ├── Application.java
+    │   │               ├── common
+    │   │               │   ├── Person.java
+    │   │               │   └── vehicle
+    │   │               │       ├── bike
+    │   │               │       ├── car
+    │   │               │       └── CarManager.java
+    │   │               ├── config
+    │   │               │   └── DataSourceConfig.java
+    │   │               ├── controller
+    │   │               │   ├── EmployeeController.java
+    │   │               │   ├── FinanceController.java
+    │   │               │   ├── StoreController.java
+    │   │               │   ├── UserController.java
+    │   │               │   └── VehicleController.java
+    │   │               ├── dto
+    │   │               │   ├── EmployeeDTO.java
+    │   │               │   ├── FinanceDTO.java
+    │   │               │   ├── StoreDTO.java
+    │   │               │   ├── UserDTO.java
+    │   │               │   └── VehicleDTO.java
+    │   │               ├── model
+    │   │               │   ├── Employee.java
+    │   │               │   ├── Finance.java
+    │   │               │   ├── Store.java
+    │   │               │   ├── User.java
+    │   │               │   └── Vehicle.java
+    │   │               ├── repository
+    │   │               │   ├── EmployeeDAO.java
+    │   │               │   ├── FinanceDAO.java
+    │   │               │   ├── StoreDAO.java
+    │   │               │   ├── UserDAO.java
+    │   │               │   └── VehicleDAO.java
+    │   │               ├── service
+    │   │               │   ├── EmployeeService.java
+    │   │               │   ├── FinanceService.java
+    │   │               │   ├── StoreService.java
+    │   │               │   ├── UserService.java
+    │   │               │   └── VehicleService.java
+    │   │               └── util
     │   ├── kotlin
     │   │   └── com
     │   │       └── jhogo
     │   │           └── irsystem
-    │   │               └── Application.kt
+    │   │               └── Application2.kt
     │   └── resources
     │       ├── application.yml
     │       └── db
     │           └── migration
     │               ├── V1__Initial_schema.sql
-    │               └── V2__Add_new_employee_fields.sql
+    │               ├── V2__Add_new_employee_fields.sql
+    │               ├── V3__Update_schema_with_relationship_fields.sql
+    │               ├── V4__Update_schema_with_user_table.sql
+    │               ├── V5__Update_schema_with_wage_to_employee.sql
+    │               └── V6__Create_finance_table.sql
     └── test
-        └── java
-            └── com
-                └── jhogo
-                    └── irsystem
-                        ├── CarDAOIntegrationTest.java
-                        └── CarServiceTest.java
+        ├── java
+        │   └── com
+        │       └── jhogo
+        │           └── irsystem
+        │               ├── CarDAOIntegrationTest.java
+        │               ├── CarServiceTest.java
+        │               ├── employee
+        │               ├── finance
+        │               ├── store
+        │               │   └── StoreServiceTest.java
+        │               ├── user
+        │               └── vehicle
+        │                   ├── VehicleDAOIntegrationTest.java
+        │                   └── VehicleServiceTest.java
+        └── resources
+            └── application-test.properties
 
-97 directories, 144 files
+121 directories, 195 files
 ```
 
 #### Build Script (`build.gradle.kts`)
@@ -433,4 +507,3 @@ CREATE TABLE Employee (
 1. **Project Structure**: Ensure the directory structure is correct and follows conventions.
 2. **Build Script**: Properly configure `build.gradle.kts` and `settings.gradle.kts` for Gradle with Kotlin DSL.
 3. **Flyway Configuration**: Use environment variables to manage sensitive data such as database URLs and credentials.
-4. **Common Parent Class**: Use an abstract class `Person` for shared fields and methods between `Employee` and `User`.

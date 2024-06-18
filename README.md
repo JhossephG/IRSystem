@@ -1,5 +1,34 @@
 # IRSystem
 
+## The Project
+
+This project is an Internal Registration System designed initially to register any kind of vehicles for car stores. The system provides functionalities for the system admin or store owner to view comprehensive details of the store, such as:
+
+- All the details of cars currently and previously in the store.
+- Managing the store balance.
+- Managing all interested clients.
+- Managing employee data and information.
+- Setting and tracking expenses.
+- And many other functions.
+
+Technologies Used:
+
+- `Backend`: Java
+- `API`: Spring Boot and RESTful services
+- `Database`: MySQL
+- `Frontend`: React
+- `Cloud Application`: AWS
+- `Version Control`: Git and GitHub
+- `Build and Configuration Management`: Gradle
+
+## License
+
+This project are licensed under the [GNU GPL v3.0](LICENSE.txt).
+
+## Copyright
+
+© Jhosseph Pathryck de Souza Gonzalez. All rights reserved.
+
 ## Environment Variables
 
 The following environment variables need to be set for the application to run properly:

@@ -1,7 +1,6 @@
 package com.jhogo.irsystem.controller;
 
 import com.jhogo.irsystem.dto.StoreDTO;
-import com.jhogo.irsystem.model.Store;
 import com.jhogo.irsystem.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,20 +17,32 @@ public class StoreController {
     @Autowired
     private StoreService storeService;
 
+    @PostMapping
+    public ResponseEntity<StoreDTO> addStore (@RequestBody StoreDTO storeDTO) throws SQLException {
+        storeService.addStore(storeDTO);
+        return new ResponseEntity<>(storeDTO, HttpStatus.CREATED);
+    }
+
     @GetMapping
     public List<StoreDTO> getAllStores () throws SQLException {
         return storeService.getAllStores();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StoreDTO> getStoreById (int storeId) throws SQLException {
+    public ResponseEntity<StoreDTO> getStoreById (@PathVariable int storeId) throws SQLException {
         StoreDTO storeDTO =  storeService.getStoreById(storeId);
         return new ResponseEntity<>(storeDTO, HttpStatus.OK);
     }
 
-    @PostMapping
-    private ResponseEntity<StoreDTO> addStore (@RequestBody StoreDTO storeDTO) throws SQLException {
-        storeService.addStore(storeDTO);
-        return ResponseEntity.ok(storeDTO);
+//    @PutMapping("/{id}")
+//    public void updateStore(@PathVariable int id, @RequestBody StoreDTO storeDTO) throws SQLException {
+//        store.setId(id);
+//        storeService.updateStore(store);
+//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteStore (@PathVariable int id) throws  SQLException {
+        storeService.deleteStore(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -13,9 +13,9 @@ public class DataSourceConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver"); // Use o driver apropriado para seu banco de dados
-        dataSource.setUrl("jdbc:h2:mem:testdb"); // URL do banco de dados de teste
-        dataSource.setUsername("sa");
+        dataSource.setDriverClassName("org.h2.Driver");
+        dataSource.setUrl("jdbc:h2:mem:testdb");
+        dataSource.setUsername("");
         dataSource.setPassword("");
         return dataSource;
     }

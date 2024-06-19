@@ -19,7 +19,7 @@ public class StoreController {
     private StoreService storeService;
 
     @PostMapping
-    public ResponseEntity<StoreDTO> addStore (@RequestBody StoreDTO storeDTO) throws SQLException {
+    public ResponseEntity<StoreDTO> addStore (@RequestBody StoreDTO storeDTO) {
         storeService.addStore(storeDTO);
         return new ResponseEntity<>(storeDTO, HttpStatus.CREATED);
     }

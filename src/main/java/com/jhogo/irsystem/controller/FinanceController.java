@@ -18,7 +18,7 @@ public class FinanceController {
     private FinanceService financeService;
 
     @PostMapping
-    public ResponseEntity<FinanceDTO> createExpense (String description, BigDecimal value, int carId) throws SQLException {
+    public ResponseEntity<FinanceDTO> createExpense (String description, BigDecimal value, int carId) {
         financeService.addExpense(description, value, carId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

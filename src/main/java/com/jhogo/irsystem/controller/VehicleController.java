@@ -18,29 +18,29 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @PostMapping
-    public ResponseEntity<VehicleDTO> addVehicle (@RequestBody VehicleDTO vehicleDTO) throws SQLException {
-        vehicleService.addCar(vehicleDTO);
+    public ResponseEntity<VehicleDTO> addVehicle (@RequestBody VehicleDTO vehicleDTO) {
+        vehicleService.addVehicle(vehicleDTO);
         return new ResponseEntity<>(vehicleDTO, HttpStatus.CREATED);
     }
 
     @GetMapping
     public List<VehicleDTO> getAllVehicles () throws SQLException {
-        return vehicleService.getAllCars();
+        return vehicleService.getAllVehicles();
     }
 
     @GetMapping("/{vehicleId}")
-    public ResponseEntity<VehicleDTO> getVehicleById (@PathVariable int vehicleId) throws SQLException {
+    public ResponseEntity<VehicleDTO> getVehicleById (@PathVariable int vehicleId) {
         return new ResponseEntity<>(vehicleService.getVehicleById(vehicleId), HttpStatus.OK);
     }
 
     @PutMapping("/{vehicleId}")
-    public ResponseEntity<VehicleDTO> updateVehicle (@RequestBody VehicleDTO vehicleDTO, @PathVariable int vehicleId) throws SQLException {
-        vehicleService.updateCar(vehicleDTO, vehicleId);
+    public ResponseEntity<VehicleDTO> updateVehicle (@RequestBody VehicleDTO vehicleDTO, @PathVariable int vehicleId) {
+        vehicleService.updateVehicle(vehicleDTO, vehicleId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{vehicleId}")
-    public ResponseEntity<Void> deleteVehicle (@PathVariable int vehicleId) throws SQLException {
+    public ResponseEntity<Void> deleteVehicle (@PathVariable int vehicleId) {
         vehicleService.deleteVehicle(vehicleId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -18,29 +18,29 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<EmployeeDTO> addEmployee (@RequestBody EmployeeDTO employeeDTO) throws SQLException {
+    public ResponseEntity<EmployeeDTO> addEmployee (@RequestBody EmployeeDTO employeeDTO) {
         employeeService.addEmployee(employeeDTO);
         return new ResponseEntity<>(employeeDTO, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<EmployeeDTO> getAllEmployees () throws SQLException {
+    public List<EmployeeDTO> getAllEmployees () {
         return employeeService.getAllEmployees();
     }
 
     @GetMapping("/{employeeId}")
-    public ResponseEntity<EmployeeDTO> getEmployeeById (@PathVariable int employeeId) throws SQLException {
+    public ResponseEntity<EmployeeDTO> getEmployeeById (@PathVariable int employeeId) {
         return new ResponseEntity<>(employeeService.getEmployeeById(employeeId), HttpStatus.OK);
     }
 
     @PutMapping("/{employeeId}")
-    public ResponseEntity<EmployeeDTO> updateEmployee (@RequestBody EmployeeDTO employeeDTO, @PathVariable int employeeId) throws SQLException {
+    public ResponseEntity<EmployeeDTO> updateEmployee (@RequestBody EmployeeDTO employeeDTO, @PathVariable int employeeId) {
         employeeService.updateEmployee(employeeDTO, employeeId);
         return new ResponseEntity<>(employeeDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/{employeeId}")
-    public ResponseEntity<Void> deleteEmployee (@PathVariable int employeeId) throws SQLException {
+    public ResponseEntity<Void> deleteEmployee (@PathVariable int employeeId) {
         employeeService.deleteEmployee(employeeId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

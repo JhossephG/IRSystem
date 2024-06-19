@@ -1,7 +1,7 @@
 package com.jhogo.irsystem.exception;
 
-public class StoreNotFoundException extends RuntimeException {
-    public StoreNotFoundException(String message) {
-        super(message);
+public class CustomSQLException extends RuntimeException {
+    public CustomSQLException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

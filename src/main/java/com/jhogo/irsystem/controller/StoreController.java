@@ -1,6 +1,7 @@
 package com.jhogo.irsystem.controller;
 
 import com.jhogo.irsystem.dto.StoreDTO;
+import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,11 +30,10 @@ public class StoreController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StoreDTO> getStoreById (@PathVariable int storeId) throws SQLException {
+    public ResponseEntity<StoreDTO> getStoreById (@PathVariable int storeId) {
         StoreDTO storeDTO =  storeService.getStoreById(storeId);
         return new ResponseEntity<>(storeDTO, HttpStatus.OK);
     }
-
 //    @PutMapping("/{id}")
 //    public void updateStore(@PathVariable int id, @RequestBody StoreDTO storeDTO) throws SQLException {
 //        store.setId(id);
@@ -41,7 +41,7 @@ public class StoreController {
 //    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStore (@PathVariable int id) throws  SQLException {
+    public ResponseEntity<Void> deleteStore (@PathVariable int id) {
         storeService.deleteStore(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

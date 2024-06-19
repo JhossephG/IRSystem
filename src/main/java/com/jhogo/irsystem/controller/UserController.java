@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> addUser (@RequestBody UserDTO userDTO) throws SQLException {
+    public ResponseEntity<UserDTO> addUser (@RequestBody UserDTO userDTO) {
         userService.addUser(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
@@ -29,19 +29,19 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDTO> getUserById (@PathVariable int userId) throws SQLException {
+    public ResponseEntity<UserDTO> getUserById (@PathVariable int userId) {
         UserDTO userDTO = userService.getUserById(userId);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<UserDTO> updateUser (@RequestBody UserDTO userDTO) throws SQLException {
+    public ResponseEntity<UserDTO> updateUser (@RequestBody UserDTO userDTO) {
         userService.updateUser(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteUser (@PathVariable int userId) throws SQLException {
+    public ResponseEntity<Void> deleteUser (@PathVariable int userId) {
         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

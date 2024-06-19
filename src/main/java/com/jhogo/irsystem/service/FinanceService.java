@@ -1,5 +1,6 @@
 package com.jhogo.irsystem.service;
 
+import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.model.Finance;
 import com.jhogo.irsystem.repository.FinanceDAO;
 
@@ -14,19 +15,27 @@ public class FinanceService {
         this.financeDAO = financeDAO;
     }
 
-    public void addExpense(String description, BigDecimal value, int carId) throws SQLException {
-        Finance expense = new Finance();
-        expense.setDescription(description);
-        expense.setValue(value);
-        expense.setCarId(carId);
-        financeDAO.insertExpense(expense);
+    public void addExpense(String description, BigDecimal value, int carId) {
+        try {
+            Finance expense = new Finance();
+            expense.setDescription(description);
+            expense.setValue(value);
+            expense.setCarId(carId);
+            financeDAO.insertExpense(expense);
+        } catch (SQLException e) {
+            throw new CustomSQLException("Error adding new expense", e);
+        }
     }
 
-    public void addToBalance (BigDecimal value, int storeId) throws SQLException {
-        if(value.compareTo(BigDecimal.ZERO) < 0)  {
-            System.out.println("Negative values are not allowed.");
-            return;
+    public void addToBalance (BigDecimal value, int storeId) {
+        try {
+            if (value.compareTo(BigDecimal.ZERO) < 0) {
+                System.out.println("Negative values are not allowed.");
+                return;
+            }
+            financeDAO.addToBalance(value, storeId);
+        } catch (SQLException e) {
+           throw new CustomSQLException("Error adding value to balance", e);
         }
-        financeDAO.addToBalance(value, storeId);
     }
 }

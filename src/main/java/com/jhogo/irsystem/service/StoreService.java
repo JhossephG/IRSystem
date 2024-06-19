@@ -107,7 +107,7 @@ public class StoreService {
    public void sellVehicle() {
        Scanner scan = new Scanner(System.in);
        try {
-           List<VehicleDTO> vehiclesList = vehicleService.getAllCars();
+           List<VehicleDTO> vehiclesList = vehicleService.getAllVehicles();
 
            if (vehiclesList.isEmpty()) {
                System.out.println("No vehicles available for sale.");
@@ -126,7 +126,7 @@ public class StoreService {
 
            VehicleDTO vehicleDTO = vehiclesList.get(vehicleIndex);
            vehicleDTO.setAvailability(false);
-           vehicleService.updateCar(vehicleDTO, vehicleDTO.getId());
+           vehicleService.updateVehicle(vehicleDTO, vehicleDTO.getId());
            List<Integer> ids = new ArrayList<>();
            ids = storeService.getStoresId();
            int storeId = ids.get(0);

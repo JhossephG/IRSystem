@@ -63,10 +63,10 @@ public class StoreServiceTest {
         vehicle1 = new VehicleDTO("Model1", "Brand1", "VIN1", 2015, new BigDecimal("15000.00"), new BigDecimal("10000.00"), true);
         vehicle2 = new VehicleDTO("Model2", "Brand2", "VIN2", 2016, new BigDecimal("20000.00"), new BigDecimal("15000.00"), true);
 
-        vehicleService.addCar(vehicle1);
-        vehicleService.addCar(vehicle2);
+        vehicleService.addVehicle(vehicle1);
+        vehicleService.addVehicle(vehicle2);
 
-        when(vehicleService.getAllCars()).thenReturn(Arrays.asList(vehicle1, vehicle2));
+        when(vehicleService.getAllVehicles()).thenReturn(Arrays.asList(vehicle1, vehicle2));
 
     }
 
@@ -76,7 +76,7 @@ public class StoreServiceTest {
 
         storeService.sellVehicle(mockScanner);
 
-        verify(vehicleService).updateCar(vehicle1, vehicle1.getId());
+        verify(vehicleService).updateVehicle(vehicle1, vehicle1.getId());
         verify(storeDAO).updateBalance(vehicle1.getSaleValue(), store.getId());
     }
 
@@ -88,7 +88,7 @@ public class StoreServiceTest {
 
         assertTrue(vehicle1.isAvailability());
         assertTrue(vehicle2.isAvailability());
-        verify(vehicleService, never()).updateCar(any(), anyInt());
+        verify(vehicleService, never()).updateVehicle(any(), anyInt());
         verify(storeDAO, never()).updateBalance(any(), anyInt());
     }
 }

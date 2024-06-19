@@ -1,6 +1,7 @@
 package com.jhogo.irsystem.service;
 
 import com.jhogo.irsystem.dto.StoreDTO;
+import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.repository.FinanceDAO;
 import com.jhogo.irsystem.dto.VehicleDTO;
 import com.jhogo.irsystem.model.Store;
@@ -17,7 +18,7 @@ public class StoreService {
    private final StoreDAO storeDAO;
    private StoreDTO storeDTO;
    private StoreService storeService;
-    private FinanceDAO financeDAO;
+   private FinanceDAO financeDAO;
    private FinanceService financeService;
    private VehicleService vehicleService;
 
@@ -25,47 +26,40 @@ public class StoreService {
        this.storeDAO = storeDAO;
    }
 
-   public void addStore (StoreDTO storeDTO) throws SQLException {
-       Store store = new Store();
-       store.setName(storeDTO.getName());
-       store.setAddress(storeDTO.getAddress());
-       store.setRegisterNumber(storeDTO.getRegisterNumber());
-       store.setBalance(storeDTO.getBalance());
-       storeDAO.insertStore(store);
+   public void addStore (StoreDTO storeDTO) {
+       try {
+           Store store = new Store();
+           store.setName(storeDTO.getName());
+           store.setAddress(storeDTO.getAddress());
+           store.setRegisterNumber(storeDTO.getRegisterNumber());
+           store.setBalance(storeDTO.getBalance());
+           storeDAO.insertStore(store);
+       } catch (SQLException e) {
+           throw new CustomSQLException("Error adding store", e);
+       }
    }
 
-    public List<Integer> getStoresId() throws SQLException {
-       List <Integer> ids = new ArrayList<>();
-       ids= storeDAO.getStoresId();
-       return ids;
+    public List<Integer> getStoresId() {
+       try {
+           List<Integer> ids = new ArrayList<>();
+           ids = storeDAO.getStoresId();
+           return ids;
+       } catch (SQLException e) {
+           throw new CustomSQLException("Error retrieving id's from Stores", e);
+       }
    }
 
-   public int getIdByStoreName (String storeName) throws SQLException {
-       return storeDAO.getIdByStoreName(storeName);
+   public int getIdByStoreName (String storeName) {
+       try {
+           return storeDAO.getIdByStoreName(storeName);
+       } catch (SQLException e) {
+           throw new CustomSQLException("Error getting id from store with name " + storeName, e);
+       }
    }
 
-   public StoreDTO getStoreById (int storeId) throws SQLException {
-       Store store = storeDAO.getStoreById(storeId);
-       storeDTO.setId(store.getId());
-       storeDTO.setName(store.getName());
-       storeDTO.setAddress(store.getAddress());
-       storeDTO.setRegisterNumber(store.getRegisterNumber());
-       storeDTO.setPhoneNumber(store.getPhoneNumber());
-       storeDTO.setExpenses(store.getExpenses());
-       storeDTO.setBalance(store.getBalance());
-       storeDTO.setTotalOfEmployees(store.getTotalOfEmployees());
-       storeDTO.setTotalOfCars(store.getTotalOfCars());
-       return storeDTO;
-   }
-
-   public void deleteStore (int storeId) throws  SQLException {
-       storeDAO.deleteStore(storeId);
-   }
-
-   public List<StoreDTO> getAllStores () throws  SQLException {
-       List<Store> stores = storeDAO.getAllStores();
-       return stores.stream().map(store -> {
-           StoreDTO storeDTO = new StoreDTO();
+   public StoreDTO getStoreById (int storeId) {
+       try {
+           Store store = storeDAO.getStoreById(storeId);
            storeDTO.setId(store.getId());
            storeDTO.setName(store.getName());
            storeDTO.setAddress(store.getAddress());
@@ -76,7 +70,38 @@ public class StoreService {
            storeDTO.setTotalOfEmployees(store.getTotalOfEmployees());
            storeDTO.setTotalOfCars(store.getTotalOfCars());
            return storeDTO;
-       }).collect(Collectors.toList());
+       } catch (SQLException e) {
+           throw new CustomSQLException("Error retrieving Store by id", e);
+       }
+   }
+
+   public void deleteStore (int storeId) {
+       try {
+           storeDAO.deleteStore(storeId);
+       } catch (SQLException e) {
+           throw new CustomSQLException("Error deleting Store", e);
+       }
+   }
+
+   public List<StoreDTO> getAllStores () {
+       try {
+           List<Store> stores = storeDAO.getAllStores();
+           return stores.stream().map(store -> {
+               StoreDTO storeDTO = new StoreDTO();
+               storeDTO.setId(store.getId());
+               storeDTO.setName(store.getName());
+               storeDTO.setAddress(store.getAddress());
+               storeDTO.setRegisterNumber(store.getRegisterNumber());
+               storeDTO.setPhoneNumber(store.getPhoneNumber());
+               storeDTO.setExpenses(store.getExpenses());
+               storeDTO.setBalance(store.getBalance());
+               storeDTO.setTotalOfEmployees(store.getTotalOfEmployees());
+               storeDTO.setTotalOfCars(store.getTotalOfCars());
+               return storeDTO;
+           }).collect(Collectors.toList());
+       } catch (SQLException e) {
+           throw new CustomSQLException("Error getting all stores", e);
+       }
    }
 
    public void sellVehicle() {
@@ -110,8 +135,7 @@ public class StoreService {
        } catch (InputMismatchException e) {
            System.out.println("Invalid input. Please enter a valid index.");
        } catch (SQLException e) {
-           e.printStackTrace();
-           System.out.println("Error occurred while selling the vehicle.");
+           throw new CustomSQLException("Error while selling the vehicle", e);
        } finally {
            scan.close();  // Ensure the scanner is closed to avoid resource leaks
        }

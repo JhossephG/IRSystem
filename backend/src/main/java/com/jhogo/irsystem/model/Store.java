@@ -4,12 +4,8 @@ import java.util.List;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name="store")
 public class Store {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int totalOfEmployees;
     private int totalOfCars;

@@ -3,19 +3,22 @@ import com.jhogo.irsystem.dto.EmployeeDTO;
 import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.model.Employee;
 import com.jhogo.irsystem.repository.EmployeeDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class EmployeeService {
+
     private final EmployeeDAO employeesDAO;
 
     private EmployeeService (EmployeeDAO employeesDAO){
         this.employeesDAO = employeesDAO;
     }
 
-    public void addEmployee(EmployeeDTO employeesDTO) {
+    public void addEmployee(EmployeeDTO employeesDTO, int storeId) {
         try {
             Employee employees = new Employee();
             employees.setFullName(employeesDTO.getFullName());
@@ -25,6 +28,7 @@ public class EmployeeService {
             employees.setRole(employeesDTO.getRole());
             employees.setUsername(employeesDTO.getUsername());
             employees.setWage(employeesDTO.getWage());
+            employees.setStore_id(storeId);
             employeesDAO.insertEmployee(employees);
         } catch (SQLException e) {
             throw new CustomSQLException("Error adding new employee", e);
@@ -45,7 +49,6 @@ public class EmployeeService {
             employeeDTO.setFullName(employee.getFullName());
             employeeDTO.setRole(employee.getRole());
             employeeDTO.setWage(employee.getWage());
-            employeeDTO.setStoreId(employee.getStoreId());
             return employeeDTO;
         } catch (SQLException e) {
             throw new CustomSQLException("Error getting employee using the id "+ employeeId, e);
@@ -74,16 +77,16 @@ public class EmployeeService {
 
     public void updateEmployee (EmployeeDTO employeesDTO, int employeeId) { //missing use the employeeId in DAO layer
         try {
-            Employee employees = new Employee();
-            employees.setId(employeesDTO.getId());
-            employees.setFullName(employeesDTO.getFullName());
-            employees.setAddress(employeesDTO.getAddress());
-            employees.setBirthDate(employeesDTO.getBirthDate());
-            employees.setPassword(employeesDTO.getPassword());
-            employees.setRole(employeesDTO.getRole());
-            employees.setUsername(employeesDTO.getUsername());
-            employees.setWage(employeesDTO.getWage());
-            employeesDAO.updateEmployee(employees);
+            Employee employee = new Employee();
+            employee.setId(employeesDTO.getId());
+            employee.setFullName(employeesDTO.getFullName());
+            employee.setAddress(employeesDTO.getAddress());
+            employee.setBirthDate(employeesDTO.getBirthDate());
+            employee.setPassword(employeesDTO.getPassword());
+            employee.setRole(employeesDTO.getRole());
+            employee.setUsername(employeesDTO.getUsername());
+            employee.setWage(employeesDTO.getWage());
+            employeesDAO.updateEmployee(employee, employeeId);
         } catch (SQLException e) {
             throw new CustomSQLException("Error updating employee with id "+employeeId, e);
         }

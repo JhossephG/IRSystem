@@ -3,6 +3,8 @@ package com.jhogo.irsystem.service;
 import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.model.Finance;
 import com.jhogo.irsystem.repository.FinanceDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -20,7 +22,7 @@ public class FinanceService {
             Finance expense = new Finance();
             expense.setDescription(description);
             expense.setValue(value);
-            expense.setCarId(carId);
+            expense.setVehicle_id(carId);
             financeDAO.insertExpense(expense);
         } catch (SQLException e) {
             throw new CustomSQLException("Error adding new expense", e);

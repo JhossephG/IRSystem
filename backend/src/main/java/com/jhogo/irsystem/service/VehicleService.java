@@ -3,6 +3,8 @@ import com.jhogo.irsystem.dto.VehicleDTO;
 import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.model.Vehicle;
 import com.jhogo.irsystem.repository.VehicleDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;

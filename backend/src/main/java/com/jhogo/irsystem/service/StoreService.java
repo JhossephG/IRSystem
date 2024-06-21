@@ -6,6 +6,8 @@ import com.jhogo.irsystem.repository.FinanceDAO;
 import com.jhogo.irsystem.dto.VehicleDTO;
 import com.jhogo.irsystem.model.Store;
 import com.jhogo.irsystem.repository.StoreDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -105,15 +107,14 @@ public class StoreService {
    }
 
    public void sellVehicle() {
-       Scanner scan = new Scanner(System.in);
-       try {
+       try (Scanner scan = new Scanner(System.in)) {
            List<VehicleDTO> vehiclesList = vehicleService.getAllVehicles();
 
            if (vehiclesList.isEmpty()) {
                System.out.println("No vehicles available for sale.");
                return;
            }
-            // Display the list of vehicles with indices
+           // Display the list of vehicles with indices
            for (int i = 0; i < vehiclesList.size(); i++) {
                System.out.println(i + ": " + vehiclesList.get(i));
            }
@@ -136,8 +137,6 @@ public class StoreService {
            System.out.println("Invalid input. Please enter a valid index.");
        } catch (SQLException e) {
            throw new CustomSQLException("Error while selling the vehicle", e);
-       } finally {
-           scan.close();  // Ensure the scanner is closed to avoid resource leaks
        }
    }
 }

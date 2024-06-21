@@ -1,9 +1,11 @@
 package com.jhogo.irsystem.common;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Id;
 import java.sql.Date;
 
+@MappedSuperclass
 public abstract class Person {
 
     @Id

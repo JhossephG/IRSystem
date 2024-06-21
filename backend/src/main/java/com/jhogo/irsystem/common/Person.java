@@ -5,11 +5,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Id;
 import java.sql.Date;
 
-@MappedSuperclass
 public abstract class Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String idNumber;
     private String phoneNumber;
@@ -20,7 +17,6 @@ public abstract class Person {
     private String address;
     private Date birthDate;
 
-    // Getters and setters
     public int getId() {
         return id;
     }

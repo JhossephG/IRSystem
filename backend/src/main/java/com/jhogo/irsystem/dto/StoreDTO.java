@@ -1,6 +1,9 @@
 package com.jhogo.irsystem.dto;
 
+import com.jhogo.irsystem.model.Employee;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public class StoreDTO {
     private int id;
@@ -12,6 +15,7 @@ public class StoreDTO {
     private String phoneNumber;
     private BigDecimal balance;
     private BigDecimal expenses;
+    private List<Employee> employees;
 
     public int getId() {
         return id;
@@ -66,5 +70,8 @@ public class StoreDTO {
     }
     public void setExpenses(BigDecimal expenses) {
         this.expenses = expenses;
+    }
+    public List<Employee> getEmployees() {
+        return employees;
     }
 }

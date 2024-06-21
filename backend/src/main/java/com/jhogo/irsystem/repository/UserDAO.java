@@ -1,31 +1,37 @@
 package com.jhogo.irsystem.repository;
 import com.jhogo.irsystem.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class UserDAO {
-    private Connection connection;
+    private final DataSource dataSource;
 
-    public UserDAO(Connection connection) {
-        this.connection=connection;
+    @Autowired
+    public UserDAO(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public void insertUser (User user) throws SQLException {
         String sql = "INSERT * INTO User (name, address, birthDate, idNumber, password, phoneNumber, email, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, user.getFullName());
-            statement.setString(2, user.getAddress());
-            statement.setDate(3, user.getBirthDate());
-            statement.setString(4, user.getIdNumber());
-            statement.setString(5, user.getPassword());
-            statement.setString(6, user.getPhoneNumber());
-            statement.setString(7, user.getEmail());
-            statement.setTimestamp(8, user.getLastUpdated());
-            statement.executeUpdate();
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, user.getFullName());
+            stmt.setString(2, user.getAddress());
+            stmt.setDate(3, user.getBirthDate());
+            stmt.setString(4, user.getIdNumber());
+            stmt.setString(5, user.getPassword());
+            stmt.setString(6, user.getPhoneNumber());
+            stmt.setString(7, user.getEmail());
+            stmt.setTimestamp(8, user.getLastUpdated());
+            stmt.executeUpdate();
 
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     user.setId(generatedKeys.getInt(1));
                 }
@@ -35,20 +41,21 @@ public class UserDAO {
 
     public User getUserById (int userId) throws SQLException {
         String sql = "SELECT * FROM User WHERE id=?";
-        try (PreparedStatement pst = connection.prepareStatement(sql)) {
-            pst.setInt(1, userId);
-            try (ResultSet rs = pst.executeQuery()){
-                if(rs.next()){
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            try (ResultSet result = stmt.executeQuery()){
+                if(result.next()){
                     User user = new User();
-                    user.setId(rs.getInt("id"));
-                    user.setEmail(rs.getString("email"));
-                    user.setIdNumber(rs.getString("idNumber"));
-                    user.setLastUpdated(rs.getTimestamp("lastUpdated"));
-                    user.setPhoneNumber(rs.getString("password"));
-                    user.setPhoneNumber(rs.getString("phoneNumber"));
-                    user.setAddress(rs.getString("address"));
-                    user.setBirthDate(rs.getDate("birthDate"));
-                    user.setFullName(rs.getString("name"));
+                    user.setId(result.getInt("id"));
+                    user.setEmail(result.getString("email"));
+                    user.setIdNumber(result.getString("idNumber"));
+                    user.setLastUpdated(result.getTimestamp("lastUpdated"));
+                    user.setPhoneNumber(result.getString("password"));
+                    user.setPhoneNumber(result.getString("phoneNumber"));
+                    user.setAddress(result.getString("address"));
+                    user.setBirthDate(result.getDate("birthDate"));
+                    user.setFullName(result.getString("name"));
                     return user;
                 }
             }
@@ -59,19 +66,20 @@ public class UserDAO {
     public List<User> getAllUsers () throws SQLException {
         List <User> users = new ArrayList<>();
         String sql = "SELECT * FROM User";
-        try (Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(sql)) {
-                while(rs.next()){
+        try (Connection connection = dataSource.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet result = stmt.executeQuery(sql)) {
+                while(result.next()){
                     User user = new User();
-                    user.setId(rs.getInt("id"));
-                    user.setEmail(rs.getString("email"));
-                    user.setIdNumber(rs.getString("idNumber"));
-                    user.setLastUpdated(rs.getTimestamp("lastUpdated"));
-                    user.setPassword(rs.getString("password"));
-                    user.setPhoneNumber(rs.getString("phoneNumber"));
-                    user.setAddress(rs.getString("address"));
-                    user.setBirthDate(rs.getDate("birthDate"));
-                    user.setFullName(rs.getString("name"));
+                    user.setId(result.getInt("id"));
+                    user.setEmail(result.getString("email"));
+                    user.setIdNumber(result.getString("idNumber"));
+                    user.setLastUpdated(result.getTimestamp("lastUpdated"));
+                    user.setPassword(result.getString("password"));
+                    user.setPhoneNumber(result.getString("phoneNumber"));
+                    user.setAddress(result.getString("address"));
+                    user.setBirthDate(result.getDate("birthDate"));
+                    user.setFullName(result.getString("name"));
                     users.add(user);
                 }
             }
@@ -80,25 +88,27 @@ public class UserDAO {
 
     public void updateUser (User user) throws  SQLException{
         String sql = "UPDATE User SET name=?, address=?, birthDate=?, idNumber=?, password=?, phoneNumber=?, email=?, lastUpdated=?, WHERE id=?";
-            try(PreparedStatement pst = connection.prepareStatement(sql)) {
-                pst.setString(1, user.getFullName());
-                pst.setString(2, user.getAddress());
-                pst.setDate(3, user.getBirthDate());
-                pst.setString(4, user.getIdNumber());
-                pst.setString(5, user.getPassword());
-                pst.setString(6, user.getPhoneNumber());
-                pst.setString(7, user.getEmail());
-                pst.setTimestamp(8, user.getLastUpdated());
-                pst.setInt(9, user.getId());
-                pst.executeUpdate();
+            try(Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+                stmt.setString(1, user.getFullName());
+                stmt.setString(2, user.getAddress());
+                stmt.setDate(3, user.getBirthDate());
+                stmt.setString(4, user.getIdNumber());
+                stmt.setString(5, user.getPassword());
+                stmt.setString(6, user.getPhoneNumber());
+                stmt.setString(7, user.getEmail());
+                stmt.setTimestamp(8, user.getLastUpdated());
+                stmt.setInt(9, user.getId());
+                stmt.executeUpdate();
         }
     }
 
     public void deleteUser (int userId) throws  SQLException {
         String sql = "DELETE * FROM User WHERE id=?";
-        try(PreparedStatement pst = connection.prepareStatement(sql)){
-            pst.setInt(1,userId);
-            pst.executeUpdate();
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setInt(1,userId);
+            stmt.executeUpdate();
         }
     }
 }

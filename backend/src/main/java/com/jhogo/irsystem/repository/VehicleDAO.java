@@ -1,46 +1,60 @@
 package com.jhogo.irsystem.repository;
 import com.jhogo.irsystem.model.Vehicle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class VehicleDAO {
-    private Connection connection;
+    private final DataSource dataSource;
 
-    public VehicleDAO(Connection connection) {
-        this.connection = connection;
+    @Autowired
+    public VehicleDAO(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public void insertVehicle(Vehicle car) throws SQLException {
         String sql ="INSERT INTO Car (model, brand, vehicleIdNumber, manufactureYear, saleValue, purchaseValue, availability) VALUES (?,?,?,?,?,?,?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, car.getModel());
-            statement.setString(2, car.getBrand());
-            statement.setString(3, car.getVehicleIdNumber());
-            statement.setInt(4, car.getManufactureYear());
-            statement.setBigDecimal(5, car.getSaleValue());
-            statement.setBigDecimal(6, car.getPurchaseValue());
-            statement.setBoolean(7, car.isAvailability());
-            statement.executeUpdate();
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, car.getModel());
+            stmt.setString(2, car.getBrand());
+            stmt.setString(3, car.getVehicleIdNumber());
+            stmt.setInt(4, car.getManufactureYear());
+            stmt.setBigDecimal(5, car.getSaleValue());
+            stmt.setBigDecimal(6, car.getPurchaseValue());
+            stmt.setBoolean(7, car.isAvailability());
+            stmt.executeUpdate();
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    car.setId(generatedKeys.getInt(1));
+                }
+            }
         }
     }
 
     public List<Vehicle> getAllVehicles() throws SQLException {
         List<Vehicle> cars = new ArrayList<>();
         String sql = "SELECT * FROM Car";
-        try (Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql)) {
-                while (resultSet.next()) {
+        try (Connection connection = dataSource.getConnection();
+                Statement stmt = connection.createStatement();
+            ResultSet resul = stmt.executeQuery(sql)) {
+                while (resul.next()) {
                     Vehicle car = new Vehicle();
-                    car.setId(resultSet.getInt("id"));
-                    car.setModel(resultSet.getString("model"));
-                    car.setBrand(resultSet.getString("brand"));
-                    car.setVehicleIdNumber(resultSet.getString("vehicleIdNumber"));
-                    car.setManufactureYear(resultSet.getInt("manufactureYear"));
-                    car.setSaleValue(resultSet.getBigDecimal("saleValue"));
-                    car.setPurchaseValue(resultSet.getBigDecimal("purchaseValue"));
-                    car.setAvailability(resultSet.getBoolean("availability"));
+                    car.setId(resul.getInt("id"));
+                    car.setModel(resul.getString("model"));
+                    car.setBrand(resul.getString("brand"));
+                    car.setVehicleIdNumber(resul.getString("vehicleIdNumber"));
+                    car.setManufactureYear(resul.getInt("manufactureYear"));
+                    car.setSaleValue(resul.getBigDecimal("saleValue"));
+                    car.setPurchaseValue(resul.getBigDecimal("purchaseValue"));
+                    car.setAvailability(resul.getBoolean("availability"));
                     cars.add(car); 
                 }
             }
@@ -49,7 +63,8 @@ public class VehicleDAO {
 
     public Vehicle getVehicleById (int vehicleId) throws SQLException {
         String sql = "SELECT * FROM Vehicle WHERE id = ?";
-       try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+       try (Connection connection = dataSource.getConnection();
+               PreparedStatement stmt = connection.prepareStatement(sql)) {
            stmt.setInt(1, vehicleId);
            try (ResultSet result = stmt.executeQuery()) {
                if (result.next()) {
@@ -72,21 +87,22 @@ public class VehicleDAO {
     public List<Vehicle> getVehiclesByUserId(int userId) throws SQLException {
         List<Vehicle> cars = new ArrayList<>();
         String sql = "SELECT * FROM Car WHERE user_id=?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, userId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            try (ResultSet resul = stmt.executeQuery()) {
+                while (resul.next()) {
                     Vehicle car = new Vehicle();
-                    car.setId(resultSet.getInt("id"));
-                    car.setModel(resultSet.getString("model"));
-                    car.setBrand(resultSet.getString("brand"));
-                    car.setVehicleIdNumber(resultSet.getString("vehicleIdNumber"));
-                    car.setManufactureYear(resultSet.getInt("manufactureYear"));
-                    car.setSaleValue(resultSet.getBigDecimal("saleValue"));
-                    car.setPurchaseValue(resultSet.getBigDecimal("purchaseValue"));
-                    car.setAvailability(resultSet.getBoolean("availability"));
-                    car.setStoreId(resultSet.getInt("store_id"));
-                    car.setUserId(resultSet.getInt("user_id"));
+                    car.setId(resul.getInt("id"));
+                    car.setModel(resul.getString("model"));
+                    car.setBrand(resul.getString("brand"));
+                    car.setVehicleIdNumber(resul.getString("vehicleIdNumber"));
+                    car.setManufactureYear(resul.getInt("manufactureYear"));
+                    car.setSaleValue(resul.getBigDecimal("saleValue"));
+                    car.setPurchaseValue(resul.getBigDecimal("purchaseValue"));
+                    car.setAvailability(resul.getBoolean("availability"));
+                    car.setStore_id(resul.getInt("store_id"));
+                    car.setUser_id(resul.getInt("user_id"));
                     cars.add(car);
                 }
             }
@@ -97,21 +113,22 @@ public class VehicleDAO {
     public List<Vehicle> getVehiclesByStoreId(int storeId) throws SQLException {
         List<Vehicle> cars = new ArrayList<>();
         String sql = "SELECT * FROM Car WHERE store_id=?";
-        try(PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, storeId);
-            try(ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
+        try(Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, storeId);
+            try(ResultSet resul = stmt.executeQuery()) {
+                while (resul.next()) {
                     Vehicle car = new Vehicle();
-                    car.setId(resultSet.getInt("id"));
-                    car.setModel(resultSet.getString("model"));
-                    car.setBrand(resultSet.getString("brand"));
-                    car.setVehicleIdNumber(resultSet.getString("getVehicleIdNumber"));
-                    car.setManufactureYear(resultSet.getInt("manufactureYear"));
-                    car.setSaleValue(resultSet.getBigDecimal("saleValue"));
-                    car.setPurchaseValue(resultSet.getBigDecimal("purchaseValue"));
-                    car.setAvailability(resultSet.getBoolean("inStore"));
-                    car.setStoreId(resultSet.getInt("store_id"));
-                    car.setUserId(resultSet.getInt("user_id"));
+                    car.setId(resul.getInt("id"));
+                    car.setModel(resul.getString("model"));
+                    car.setBrand(resul.getString("brand"));
+                    car.setVehicleIdNumber(resul.getString("getVehicleIdNumber"));
+                    car.setManufactureYear(resul.getInt("manufactureYear"));
+                    car.setSaleValue(resul.getBigDecimal("saleValue"));
+                    car.setPurchaseValue(resul.getBigDecimal("purchaseValue"));
+                    car.setAvailability(resul.getBoolean("inStore"));
+                    car.setStore_id(resul.getInt("store_id"));
+                    car.setUser_id(resul.getInt("user_id"));
                     cars.add(car);
                 }
             }
@@ -121,24 +138,26 @@ public class VehicleDAO {
 
     public void updateVehicle(Vehicle car) throws SQLException {
         String sql = "UPDATE Car SET model=?, brand=?, vehicleIdNumber=?, manufactureYear=?, saleValue=?, purchaseValue=?, availability=? WHERE id=?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, car.getModel());
-            statement.setString(2, car.getBrand());
-            statement.setString(3, car.getVehicleIdNumber());
-            statement.setInt(4, car.getManufactureYear());
-            statement.setBigDecimal(5, car.getSaleValue());
-            statement.setBigDecimal(6, car.getPurchaseValue());
-            statement.setBoolean(7, car.isAvailability());
-            statement.setInt(8, car.getId());
-            statement.executeUpdate(); 
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, car.getModel());
+            stmt.setString(2, car.getBrand());
+            stmt.setString(3, car.getVehicleIdNumber());
+            stmt.setInt(4, car.getManufactureYear());
+            stmt.setBigDecimal(5, car.getSaleValue());
+            stmt.setBigDecimal(6, car.getPurchaseValue());
+            stmt.setBoolean(7, car.isAvailability());
+            stmt.setInt(8, car.getId());
+            stmt.executeUpdate();
         }
     }
 
     public void deleteVehicle(int carId) throws SQLException {
         String sql = "DELETE FROM Car WHERE id=?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)){
-            statement.setInt(1, carId);
-            statement.executeUpdate();
+        try (Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setInt(1, carId);
+            stmt.executeUpdate();
         } 
     }
 }

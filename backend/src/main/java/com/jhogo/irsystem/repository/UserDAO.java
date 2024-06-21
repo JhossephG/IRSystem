@@ -8,17 +8,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class UserDAO {
     private final DataSource dataSource;
 
-    @Autowired
     public UserDAO(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     public void insertUser (User user) throws SQLException {
-        String sql = "INSERT * INTO User (name, address, birthDate, idNumber, password, phoneNumber, email, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO User (fullName, address, birthDate, idNumber, password, phoneNumber, email, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, user.getFullName());
@@ -55,7 +53,7 @@ public class UserDAO {
                     user.setPhoneNumber(result.getString("phoneNumber"));
                     user.setAddress(result.getString("address"));
                     user.setBirthDate(result.getDate("birthDate"));
-                    user.setFullName(result.getString("name"));
+                    user.setFullName(result.getString("fullName"));
                     return user;
                 }
             }
@@ -79,7 +77,7 @@ public class UserDAO {
                     user.setPhoneNumber(result.getString("phoneNumber"));
                     user.setAddress(result.getString("address"));
                     user.setBirthDate(result.getDate("birthDate"));
-                    user.setFullName(result.getString("name"));
+                    user.setFullName(result.getString("fullName"));
                     users.add(user);
                 }
             }

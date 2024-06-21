@@ -8,11 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class EmployeeDAO  {
     private final DataSource dataSource;
 
-    @Autowired
     public EmployeeDAO(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -20,7 +18,7 @@ public class EmployeeDAO  {
     public void insertEmployee(Employee employees) throws SQLException {
         String sql = "INSERT INTO Employee (fullName, role, address, username, password, birthDate, wage, idNumber, phoneNumber, email, store_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         try(Connection connection = dataSource.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(sql)){
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             stmt.setString(1, employees.getFullName());
             stmt.setString(2, employees.getRole());
             stmt.setString(3, employees.getAddress());

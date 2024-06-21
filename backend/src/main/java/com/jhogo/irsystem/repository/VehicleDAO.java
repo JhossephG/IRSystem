@@ -9,19 +9,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class VehicleDAO {
     private final DataSource dataSource;
 
-    @Autowired
     public VehicleDAO(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     public void insertVehicle(Vehicle car) throws SQLException {
-        String sql ="INSERT INTO Car (model, brand, vehicleIdNumber, manufactureYear, saleValue, purchaseValue, availability) VALUES (?,?,?,?,?,?,?)";
+        String sql ="INSERT INTO Vehicle (model, brand, vehicleIdNumber, manufactureYear, saleValue, purchaseValue, availability) VALUES (?,?,?,?,?,?,?)";
         try (Connection connection = dataSource.getConnection();
-                PreparedStatement stmt = connection.prepareStatement(sql)) {
+                PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, car.getModel());
             stmt.setString(2, car.getBrand());
             stmt.setString(3, car.getVehicleIdNumber());

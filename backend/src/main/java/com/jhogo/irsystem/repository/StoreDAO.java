@@ -9,11 +9,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class StoreDAO {
     private final DataSource dataSource;
 
-    @Autowired
     public StoreDAO(DataSource dataSource) {
         this.dataSource=dataSource;
     }
@@ -21,7 +19,7 @@ public class StoreDAO {
     public void insertStore(Store store) throws SQLException {
         String sql = "INSERT INTO Store (name, address, registerNumber, balance) VALUES (?,?,?,?)";
         try(Connection connection = dataSource.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, store.getName());
             stmt.setString(2, store.getAddress());
             stmt.setString(3, store.getRegisterNumber());

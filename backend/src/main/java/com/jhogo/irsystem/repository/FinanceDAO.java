@@ -8,11 +8,9 @@ import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.sql.*;
 
-@Repository
 public class FinanceDAO {
     private final DataSource dataSource;
 
-    @Autowired
     public FinanceDAO(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -20,7 +18,7 @@ public class FinanceDAO {
     public void insertExpense(Finance expense) throws SQLException {
         String sql = "INSERT INTO Finance (description, value, carId) VALUES (?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(sql)) {
+             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, expense.getDescription());
             stmt.setBigDecimal(2, expense.getValue());
             if (expense.getVehicle_id() != null) {

@@ -63,12 +63,12 @@ CREATE TABLE `Employee` (
 
 CREATE TABLE `Finance` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `carId` int DEFAULT NULL,
+  `vehicle_id` int DEFAULT NULL,
   `value` decimal(10,2) DEFAULT NULL,
   `indicator` decimal(10,2) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `businessHealth` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `carId` (`carId`),
-  CONSTRAINT `Finance_ibfk_1` FOREIGN KEY (`carId`) REFERENCES `Vehicle` (`id`)
+  KEY `vehicle_id` (`vehicle_id`),
+  CONSTRAINT `Finance_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `Vehicle` (`id`)
 );

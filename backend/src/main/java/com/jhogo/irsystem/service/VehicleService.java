@@ -10,9 +10,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class VehicleService {
     private final VehicleDAO vehicleDAO;
 
+    @Autowired
     public VehicleService (VehicleDAO vehicleDAO) {
         this.vehicleDAO = vehicleDAO;
     }

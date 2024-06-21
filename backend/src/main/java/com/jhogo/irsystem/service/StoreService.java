@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+@Service
 public class StoreService {
    private final StoreDAO storeDAO;
    private StoreDTO storeDTO;
@@ -24,6 +25,7 @@ public class StoreService {
    private FinanceService financeService;
    private VehicleService vehicleService;
 
+   @Autowired
    public StoreService (StoreDAO storeDAO) {
        this.storeDAO = storeDAO;
    }

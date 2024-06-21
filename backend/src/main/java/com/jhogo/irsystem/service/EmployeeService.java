@@ -10,10 +10,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class EmployeeService {
 
     private final EmployeeDAO employeesDAO;
 
+    @Autowired
     private EmployeeService (EmployeeDAO employeesDAO){
         this.employeesDAO = employeesDAO;
     }

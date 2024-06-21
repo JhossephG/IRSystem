@@ -11,9 +11,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UserService {
     private final UserDAO userDAO;
 
+    @Autowired
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }

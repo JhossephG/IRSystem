@@ -10,9 +10,11 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 
 // The purpose of this class is to follow the SRP (Single Responsibility Principle) representing the financial logic
+@Service
 public class FinanceService {
     private final FinanceDAO financeDAO;
 
+    @Autowired
     public FinanceService(FinanceDAO financeDAO) {
         this.financeDAO = financeDAO;
     }

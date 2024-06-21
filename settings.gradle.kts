@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "IRSystem"
-include("app")
+include("backend")

@@ -4,16 +4,14 @@ import java.util.List;
 
 import com.jhogo.irsystem.common.Person;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="user")
 public class User extends Person {
     private List<Vehicle> cars;
     private Timestamp lastUpdated;
-    
-    // Getters and setters for additional fields
+
     public Timestamp getLastUpdated() {
         return lastUpdated;
     }

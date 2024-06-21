@@ -1,17 +1,12 @@
 package com.jhogo.irsystem.model;
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name="vehicle")
 public class Vehicle {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int manufactureYear;
-    private int userId;
-    private int storeId;
+    private int user_id;
+    private int store_id;
     private BigDecimal saleValue;
     private BigDecimal purchaseValue;
     private String model;
@@ -21,18 +16,6 @@ public class Vehicle {
 
     public int getManufactureYear() {
         return manufactureYear;
-    }
-    public int getUserId() {
-        return userId;
-    }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-    public int getStoreId() {
-        return storeId;
-    }
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
     }
     public void setManufactureYear(int manufactureYear) {
         this.manufactureYear = manufactureYear;
@@ -79,5 +62,17 @@ public class Vehicle {
     public void setId(int id) {
         this.id = id;
     }
+    public int getUser_id() {
+        return user_id;
     }
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+    public int getStore_id() {
+        return store_id;
+    }
+    public void setStore_id(int store_id) {
+        this.store_id = store_id;
+    }
+}
     

@@ -1,27 +1,22 @@
 package com.jhogo.irsystem.model;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
 // The purpose of this class is to follow the SRP (Single Responsibility Principle) representing the financial data
-@Entity
-@Table(name="finance")
 public class Finance {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Integer carId; // Relacionamento com Car
+    private Integer vehicle_id; // Relationship field with vehicle
     private BigDecimal value;
-    private BigDecimal indicator; // Valor a ser definido pelo administrador da empresa como valor limite para indicar a "saude" do negocio
+    private BigDecimal indicator; // Value to be defined by the admin of the company as a limit value to indicate the business "health"
     private String description;
     private boolean businessHealth;
 
-    public Integer getCarId() {
-        return carId;
+    public Integer getVehicle_id() {
+        return vehicle_id;
     }
-    public void setCarId(Integer carId) {
-        this.carId = carId;
+    public void setVehicle_id(Integer vehicle_id) {
+        this.vehicle_id = vehicle_id;
     }
     public int getId() {
         return id;

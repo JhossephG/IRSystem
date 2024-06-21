@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/stores")
+@RequestMapping("/store")
 public class StoreController {
 
     @Autowired

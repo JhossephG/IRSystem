@@ -28,11 +28,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation("com.h2database:h2:1.4.200")
+    testImplementation("com.h2database:h2:2.2.220")
 }
 
 application {
-    mainClass.set("com.jhogo.irsystem.ApplicationKt")
+    mainClass.set("com.jhogo.irsystem.Application")
 }
 
 sourceSets {
@@ -60,7 +60,7 @@ tasks.named<Test>("test") {
 }
 
 flyway {
-    url = System.getenv("DATABASE_URL") ?: "jdbc:mysql://localhost:3306/car_store"
+    url = System.getenv("DATABASE_URL") ?: "jdbc:mysql://localhost:3306/irsystem"
     user = System.getenv("DATABASE_USERNAME") ?: "root"
     password = System.getenv("DATABASE_PASSWORD") ?: "password"
 }

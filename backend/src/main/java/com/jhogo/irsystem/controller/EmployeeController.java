@@ -18,8 +18,8 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<EmployeeDTO> addEmployee (@RequestBody EmployeeDTO employeeDTO) {
-        employeeService.addEmployee(employeeDTO);
+    public ResponseEntity<EmployeeDTO> addEmployee (@RequestBody EmployeeDTO employeeDTO, @PathVariable int storeId) {
+        employeeService.addEmployee(employeeDTO, storeId);
         return new ResponseEntity<>(employeeDTO, HttpStatus.CREATED);
     }
 

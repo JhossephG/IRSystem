@@ -1,7 +1,5 @@
 package com.jhogo.irsystem.repository;
 import com.jhogo.irsystem.model.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -15,26 +13,26 @@ public class EmployeeDAO  {
         this.dataSource = dataSource;
     }
 
-    public void insertEmployee(Employee employees) throws SQLException {
+    public void insertEmployee(Employee employee, int store_id) throws SQLException {
         String sql = "INSERT INTO Employee (fullName, role, address, username, password, birthDate, wage, idNumber, phoneNumber, email, store_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         try(Connection connection = dataSource.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            stmt.setString(1, employees.getFullName());
-            stmt.setString(2, employees.getRole());
-            stmt.setString(3, employees.getAddress());
-            stmt.setString(4, employees.getUsername());
-            stmt.setString(5, employees.getPassword());
-            stmt.setDate(6, employees.getBirthDate());
-            stmt.setBigDecimal(7, employees.getWage());
-            stmt.setString(8, employees.getIdNumber());
-            stmt.setString(9, employees.getPhoneNumber());
-            stmt.setString(10, employees.getEmail());
-            stmt.setInt(11, employees.getStore_id());
+            stmt.setString(1, employee.getFullName());
+            stmt.setString(2, employee.getRole());
+            stmt.setString(3, employee.getAddress());
+            stmt.setString(4, employee.getUsername());
+            stmt.setString(5, employee.getPassword());
+            stmt.setDate(6, employee.getBirthDate());
+            stmt.setBigDecimal(7, employee.getWage());
+            stmt.setString(8, employee.getIdNumber());
+            stmt.setString(9, employee.getPhoneNumber());
+            stmt.setString(10, employee.getEmail());
+            stmt.setInt(11, store_id);
             stmt.executeUpdate();
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    employees.setId(generatedKeys.getInt(1));
+                    employee.setId(generatedKeys.getInt(1));
                 }
             }
         }

@@ -3,6 +3,7 @@ import com.jhogo.irsystem.dto.VehicleDTO;
 import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.model.Vehicle;
 import com.jhogo.irsystem.repository.VehicleDAO;
+import com.jhogo.irsystem.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class VehicleService {
+public class VehicleService implements Converter<Vehicle, VehicleDTO> {
     private final VehicleDAO vehicleDAO;
 
     @Autowired
@@ -21,15 +22,7 @@ public class VehicleService {
 
     public void addVehicle (VehicleDTO vehicleDTO) {
         try {
-            Vehicle car = new Vehicle();
-            car.setModel(vehicleDTO.getModel());
-            car.setBrand(vehicleDTO.getBrand());
-            car.setVehicleIdNumber(vehicleDTO.getVehicleIdNumber());
-            car.setManufactureYear(vehicleDTO.getManufactureYear());
-            car.setSaleValue(vehicleDTO.getSaleValue());
-            car.setPurchaseValue(vehicleDTO.getPurchaseValue());
-            car.setAvailability(vehicleDTO.isAvailability());
-            vehicleDAO.insertVehicle(car);
+            vehicleDAO.insertVehicle(convertToModel(vehicleDTO));
         } catch (SQLException e) {
             throw new CustomSQLException("Error adding new vehicle", e);
         }
@@ -38,18 +31,7 @@ public class VehicleService {
     public List<VehicleDTO> getAllVehicles () {
         try {
             List<Vehicle> cars = vehicleDAO.getAllVehicles();
-            return cars.stream().map(car -> {
-                VehicleDTO vehicleDTO = new VehicleDTO();
-                vehicleDTO.setId(car.getId());
-                vehicleDTO.setModel(car.getModel());
-                vehicleDTO.setBrand(car.getBrand());
-                vehicleDTO.setVehicleIdNumber(car.getVehicleIdNumber());
-                vehicleDTO.setManufactureYear(car.getManufactureYear());
-                vehicleDTO.setSaleValue(car.getSaleValue());
-                vehicleDTO.setPurchaseValue(car.getPurchaseValue());
-                vehicleDTO.setAvailability(car.isAvailability());
-                return vehicleDTO;
-            }).collect(Collectors.toList());
+            return cars.stream().map(this::convertToDTO).collect(Collectors.toList());
         } catch (SQLException e) {
             throw new CustomSQLException("Error getting vehicles list", e);
         }
@@ -58,16 +40,7 @@ public class VehicleService {
     public VehicleDTO getVehicleById (int vehicleId) {
         try {
             Vehicle vehicle = vehicleDAO.getVehicleById(vehicleId);
-            VehicleDTO vehicleDTO = new VehicleDTO();
-            vehicleDTO.setId(vehicle.getId());
-            vehicleDTO.setModel(vehicle.getModel());
-            vehicleDTO.setBrand(vehicle.getBrand());
-            vehicleDTO.setVehicleIdNumber(vehicle.getVehicleIdNumber());
-            vehicleDTO.setManufactureYear(vehicle.getManufactureYear());
-            vehicleDTO.setSaleValue(vehicle.getSaleValue());
-            vehicleDTO.setPurchaseValue(vehicle.getPurchaseValue());
-            vehicleDTO.setAvailability(vehicle.isAvailability());
-            return vehicleDTO;
+            return convertToDTO(vehicle);
         } catch (SQLException e) {
             throw new CustomSQLException("Error getting vehicle with id "+vehicleId, e);
         }
@@ -75,16 +48,7 @@ public class VehicleService {
 
     public void updateVehicle (VehicleDTO vehicleDTO, int vehicleId) {
         try {
-        Vehicle car = new Vehicle();
-        car.setId(vehicleId);
-        car.setModel(vehicleDTO.getModel());
-        car.setBrand(vehicleDTO.getBrand());
-        car.setVehicleIdNumber(vehicleDTO.getVehicleIdNumber());
-        car.setManufactureYear(vehicleDTO.getManufactureYear());
-        car.setSaleValue(vehicleDTO.getSaleValue());
-        car.setPurchaseValue(vehicleDTO.getPurchaseValue());
-        car.setAvailability(vehicleDTO.isAvailability());
-        vehicleDAO.updateVehicle(car);
+        vehicleDAO.updateVehicle(convertToModel(vehicleDTO), vehicleId);
         } catch (SQLException e) {
             throw new CustomSQLException("Error updating vehicle with id "+vehicleId, e);
         }
@@ -96,5 +60,32 @@ public class VehicleService {
         } catch (SQLException e) {
             throw new CustomSQLException("Error deleting vehicle with id "+vehicleId, e);
         }
+    }
+
+    @Override
+    public Vehicle convertToModel(VehicleDTO vehicleDTO) {
+        Vehicle vehicle = new Vehicle();
+        vehicle.setModel(vehicleDTO.getModel());
+        vehicle.setBrand(vehicleDTO.getBrand());
+        vehicle.setVehicleIdNumber(vehicleDTO.getVehicleIdNumber());
+        vehicle.setManufactureYear(vehicleDTO.getManufactureYear());
+        vehicle.setSaleValue(vehicleDTO.getSaleValue());
+        vehicle.setPurchaseValue(vehicleDTO.getPurchaseValue());
+        vehicle.setAvailability(vehicleDTO.isAvailability());
+        return vehicle;
+    }
+
+    @Override
+    public VehicleDTO convertToDTO(Vehicle vehicle) {
+        VehicleDTO vehicleDTO = new VehicleDTO();
+        vehicleDTO.setId(vehicle.getId());
+        vehicleDTO.setModel(vehicle.getModel());
+        vehicleDTO.setBrand(vehicle.getBrand());
+        vehicleDTO.setVehicleIdNumber(vehicle.getVehicleIdNumber());
+        vehicleDTO.setManufactureYear(vehicle.getManufactureYear());
+        vehicleDTO.setSaleValue(vehicle.getSaleValue());
+        vehicleDTO.setPurchaseValue(vehicle.getPurchaseValue());
+        vehicleDTO.setAvailability(vehicle.isAvailability());
+        return vehicleDTO;
     }
 }

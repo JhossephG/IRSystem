@@ -1,8 +1,10 @@
 package com.jhogo.irsystem.service;
 
+import com.jhogo.irsystem.dto.FinanceDTO;
 import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.model.Finance;
 import com.jhogo.irsystem.repository.FinanceDAO;
+import com.jhogo.irsystem.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,7 @@ import java.sql.SQLException;
 
 // The purpose of this class is to follow the SRP (Single Responsibility Principle) representing the financial logic
 @Service
-public class FinanceService {
+public class FinanceService implements Converter<Finance, FinanceDTO> {
     private final FinanceDAO financeDAO;
 
     @Autowired
@@ -41,5 +43,15 @@ public class FinanceService {
         } catch (SQLException e) {
            throw new CustomSQLException("Error adding value to balance", e);
         }
+    }
+
+    @Override
+    public Finance convertToModel(FinanceDTO financeDTO) {
+        return null;
+    }
+
+    @Override
+    public FinanceDTO convertToDTO(Finance finance) {
+        return null;
     }
 }

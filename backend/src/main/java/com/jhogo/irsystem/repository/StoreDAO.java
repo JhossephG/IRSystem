@@ -33,16 +33,19 @@ public class StoreDAO {
             }
         }
     }
-    public List<Integer> getStoresId() throws SQLException{
+    public List<Integer> getStoresId() throws SQLException {
         List<Integer> ids = new ArrayList<>();
         String sql = "SELECT id FROM Store";
         try (Connection connection = dataSource.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet result = stmt.executeQuery(sql)) {
-                while (result.next()) {
-                    ids.add(result.getInt("id"));
-                }
+            while (result.next()) {
+                ids.add(result.getInt("id"));
             }
+        } catch (SQLException e) {
+            System.err.println("Error executing query: " + e.getMessage());
+            throw e;
+        }
         return ids;
     }
     public int getIdByStoreName (String storeName) throws SQLException {

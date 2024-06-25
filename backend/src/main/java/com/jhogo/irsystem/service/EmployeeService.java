@@ -3,6 +3,7 @@ import com.jhogo.irsystem.dto.EmployeeDTO;
 import com.jhogo.irsystem.exception.CustomSQLException;
 import com.jhogo.irsystem.model.Employee;
 import com.jhogo.irsystem.repository.EmployeeDAO;
+import com.jhogo.irsystem.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,27 +12,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EmployeeService {
+public class EmployeeService implements Converter<Employee, EmployeeDTO> {
 
     private final EmployeeDAO employeesDAO;
+    private final StoreService storeService;
 
     @Autowired
-    private EmployeeService (EmployeeDAO employeesDAO){
+    public EmployeeService (EmployeeDAO employeesDAO, StoreService storeService){
         this.employeesDAO = employeesDAO;
+        this.storeService = storeService;
     }
 
-    public void addEmployee(EmployeeDTO employeesDTO, int storeId) {
+    public void addEmployee(EmployeeDTO employeeDTO, int storeId) {
         try {
-            Employee employees = new Employee();
-            employees.setFullName(employeesDTO.getFullName());
-            employees.setAddress(employeesDTO.getAddress());
-            employees.setBirthDate(employeesDTO.getBirthDate());
-            employees.setPassword(employeesDTO.getPassword());
-            employees.setRole(employeesDTO.getRole());
-            employees.setUsername(employeesDTO.getUsername());
-            employees.setWage(employeesDTO.getWage());
-            employees.setStore_id(storeId);
-            employeesDAO.insertEmployee(employees);
+            List<Integer> storeIds = storeService.getStoresId();
+            if (storeIds.contains(storeId)) {
+                employeesDAO.insertEmployee(convertToModel(employeeDTO), storeId);
+            }
         } catch (SQLException e) {
             throw new CustomSQLException("Error adding new employee", e);
         }
@@ -39,19 +36,8 @@ public class EmployeeService {
 
     public EmployeeDTO getEmployeeById (int employeeId) {
         try {
-            EmployeeDTO employeeDTO = new EmployeeDTO();
             Employee employee = employeesDAO.getEmployeeById(employeeId);
-            employeeDTO.setId(employee.getId());
-            employeeDTO.setEmail(employee.getEmail());
-            employeeDTO.setIdNumber(employee.getIdNumber());
-            employeeDTO.setPassword(employee.getPassword());
-            employeeDTO.setPhoneNumber(employee.getPhoneNumber());
-            employeeDTO.setAddress(employee.getAddress());
-            employeeDTO.setBirthDate(employee.getBirthDate());
-            employeeDTO.setFullName(employee.getFullName());
-            employeeDTO.setRole(employee.getRole());
-            employeeDTO.setWage(employee.getWage());
-            return employeeDTO;
+            return convertToDTO(employee);
         } catch (SQLException e) {
             throw new CustomSQLException("Error getting employee using the id "+ employeeId, e);
         }
@@ -100,5 +86,34 @@ public class EmployeeService {
         } catch (SQLException e) {
             throw new CustomSQLException("Error deleting employee with id "+employeeId, e);
         }
+    }
+
+    @Override
+    public Employee convertToModel(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        employee.setFullName(employeeDTO.getFullName());
+        employee.setAddress(employeeDTO.getAddress());
+        employee.setBirthDate(employeeDTO.getBirthDate());
+        employee.setPassword(employeeDTO.getPassword());
+        employee.setRole(employeeDTO.getRole());
+        employee.setUsername(employeeDTO.getUsername());
+        employee.setWage(employeeDTO.getWage());
+        return employee;
+    }
+
+    @Override
+    public EmployeeDTO convertToDTO(Employee employee) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setId(employee.getId());
+        employeeDTO.setEmail(employee.getEmail());
+        employeeDTO.setIdNumber(employee.getIdNumber());
+        employeeDTO.setPassword(employee.getPassword());
+        employeeDTO.setPhoneNumber(employee.getPhoneNumber());
+        employeeDTO.setAddress(employee.getAddress());
+        employeeDTO.setBirthDate(employee.getBirthDate());
+        employeeDTO.setFullName(employee.getFullName());
+        employeeDTO.setRole(employee.getRole());
+        employeeDTO.setWage(employee.getWage());
+        return employeeDTO;
     }
 }

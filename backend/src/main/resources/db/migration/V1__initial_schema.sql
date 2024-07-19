@@ -1,4 +1,4 @@
-CREATE TABLE `Store` (
+CREATE TABLE IF NOT EXISTS `Store` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE `Store` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `User` (
+CREATE TABLE IF NOT EXISTS `User` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idNumber` varchar(100) DEFAULT NULL,
   `phoneNumber` varchar(100) DEFAULT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE `User` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Vehicle` (
+CREATE TABLE IF NOT EXISTS `Vehicle` (
   `id` int NOT NULL AUTO_INCREMENT,
   `model` varchar(100) DEFAULT NULL,
   `brand` varchar(100) DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `Vehicle` (
   CONSTRAINT `Vehicle_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`)
 );
 
-CREATE TABLE `Employee` (
+CREATE TABLE IF NOT EXISTS `Employee` (
   `id` int NOT NULL AUTO_INCREMENT,
   `role` varchar(50) DEFAULT NULL,
   `wage` decimal(10,2) DEFAULT '0.00',
@@ -61,7 +61,7 @@ CREATE TABLE `Employee` (
   CONSTRAINT `Employee_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `Store` (`id`)
 );
 
-CREATE TABLE `Finance` (
+CREATE TABLE IF NOT EXISTS `Finance` (
   `id` int NOT NULL AUTO_INCREMENT,
   `vehicle_id` int DEFAULT NULL,
   `value` decimal(10,2) DEFAULT NULL,

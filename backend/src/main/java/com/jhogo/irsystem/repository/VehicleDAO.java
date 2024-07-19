@@ -97,7 +97,7 @@ public class VehicleDAO {
                     vehicle.setPurchaseValue(resul.getBigDecimal("purchaseValue"));
                     vehicle.setAvailability(resul.getBoolean("availability"));
                     vehicle.setStore_id(resul.getInt("store_id"));
-                    vehicle.setUser_id(resul.getInt("user_id"));
+                    vehicle.setOrder_id(resul.getInt("user_id"));
                     cars.add(vehicle);
                 }
             }
@@ -123,7 +123,7 @@ public class VehicleDAO {
                     vehicle.setPurchaseValue(resul.getBigDecimal("purchaseValue"));
                     vehicle.setAvailability(resul.getBoolean("inStore"));
                     vehicle.setStore_id(resul.getInt("store_id"));
-                    vehicle.setUser_id(resul.getInt("user_id"));
+                    vehicle.setOrder_id(resul.getInt("user_id"));
                     cars.add(vehicle);
                 }
             }

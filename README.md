@@ -2,9 +2,9 @@
 
 ## The Project
 
-This project is an Internal Registration System designed initially to register any kind of vehicles for car stores. The system provides functionalities for the system admin or store owner to view comprehensive details of the store, such as:
+This project is an Internal Registration System designed initially to register any kind of product for any type of store. The system provides functionalities for the system admin or store owner to view comprehensive details of the store, such as:
 
-- All the details of cars currently and previously in the store.
+- All the details of products currently and previously in the store.
 - Managing the store balance.
 - Managing all interested clients.
 - Managing employee data and information.
@@ -13,11 +13,11 @@ This project is an Internal Registration System designed initially to register a
 
 Technologies Used:
 
-- `Backend`: Java
-- `API`: Spring Boot and RESTful services
+- `Backend`: Java 
+- `API`: Spring Boot, JPA Repository and RESTful services
 - `Database`: MySQL
 - `Frontend`: React
-- `Cloud Application`: AWS
+- `Cloud Application/deploy`: AWS
 - `Version Control`: Git and GitHub
 - `Build and Configuration Management`: Gradle
 

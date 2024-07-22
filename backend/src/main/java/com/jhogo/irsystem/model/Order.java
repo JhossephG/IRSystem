@@ -1,15 +1,22 @@
 package com.jhogo.irsystem.model;
 
+import javax.persistence.*;
 import java.security.Timestamp;
 import java.util.Date;
+import java.util.List;
 
+@Entity
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int user_id;
     private int store_id;
     private Timestamp order_date;
     private double total_amount;
     private String status;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItems> items;
 
     public int getId() {
         return id;

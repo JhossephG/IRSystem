@@ -1,5 +1,8 @@
 package com.jhogo.irsystem.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Food {
     private int order_id;
     private String name;

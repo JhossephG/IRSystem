@@ -1,12 +1,29 @@
 package com.jhogo.irsystem.model;
 
+import com.jhogo.irsystem.common.Product;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.*;
+
+@Entity
 public class OrderItems {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int order_id;
     private int product_id;
     private int quantity;
     private Double price;
     private String product_name;
+    @ManyToMany
+    @JoinColumn(name = "order_id")
+    private Order order;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     public int getId() {
         return id;

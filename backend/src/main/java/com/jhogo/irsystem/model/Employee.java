@@ -1,8 +1,10 @@
 package com.jhogo.irsystem.model;
 import com.jhogo.irsystem.common.Person;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
+@Entity
 public class Employee extends Person {
     private String role;
     private BigDecimal wage;

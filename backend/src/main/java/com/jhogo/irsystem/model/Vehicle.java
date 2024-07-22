@@ -1,8 +1,10 @@
 package com.jhogo.irsystem.model;
 import com.jhogo.irsystem.common.Product;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
+@Entity
 public class Vehicle extends Product {
     private int manufactureYear;
     private String model;

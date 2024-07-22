@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.math.BigDecimal;
 
+@Entity
 public class Store {
 
     private int id;

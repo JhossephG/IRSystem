@@ -1,8 +1,10 @@
 package com.jhogo.irsystem.model;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 // The purpose of this class is to follow the SRP (Single Responsibility Principle) representing the financial data
+@Entity
 public class Finance {
 
     private int id;

@@ -6,6 +6,7 @@ import com.jhogo.irsystem.common.Person;
 
 import javax.persistence.*;
 
+@Entity
 public class User extends Person {
     private List<Vehicle> cars;
     private Timestamp lastUpdated;

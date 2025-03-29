@@ -1,0 +1,1 @@
+ALTER TABLE Finance RENAME COLUMN vehicle_id TO product_id;
